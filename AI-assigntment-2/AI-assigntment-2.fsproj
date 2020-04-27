@@ -26,6 +26,8 @@
         <Compile Include="Lexer.fs" />
         <Folder Include="Utility" />
         <Compile Include="Tasks\TaskOne.fs" />
+        <Compile Include="Tasks\BeliefBase.fs" />
+        <Compile Include="Tasks\LogicalEntailment.fs" />
         <Compile Include="Tests\TestTaskTwoNonDeterministic.fs" />
     </ItemGroup>
 

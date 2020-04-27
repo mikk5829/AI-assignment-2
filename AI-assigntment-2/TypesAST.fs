@@ -28,12 +28,13 @@ type b =
     | LessEqual of (a * a)
 
 type C =
+    | BelievesSet of (a * D) // Ex. B = {p, q, p → ¬q}
     | InitialArraySequence of (a * C)
     | InitialValues of (C * C) // C,C
     | InitialAssign of (a * a) // a = a - Only works when called from InitialValues sequence
     | InitialArray of (a * D) // a := [a,...,a]
     | Assign of (a * a) // x := a
-    | AssignSet of (a * char Set) // Ex. A = {+, -, 0}
+
     | AssignArray of (a * a) // A[a] := a
     | Skip // skip
     | Sequence of (C * C) // C; C

@@ -31,7 +31,7 @@ rule tokenize = parse
 | '-'           { SUBTRACT }
 | '0'           { ZERO }
 | '^'           { POWER }
-| ','           { INITIALVALUES }
+| ','           { COMMA }
 | "true"        { TRUE }
 | "false"       { FALSE }
 | '&'           { SHORTAND }

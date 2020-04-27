@@ -206,7 +206,7 @@ and tokenize  lexbuf =
           )
   | 10 -> ( 
 # 34 "Lexer.fsl"
-                                 INITIALVALUES 
+                                 COMMA 
 # 210 "Lexer.fs"
           )
   | 11 -> ( 
