@@ -1,9 +1,0 @@
-Action: Enter
-Node: q▷
-x: 5
-y: 0
-
-Action: !(x>0)
-Node: q▷
-x: 0
-y: 32

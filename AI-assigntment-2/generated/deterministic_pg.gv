@@ -1,7 +1,0 @@
-digraph program_graph {rankdir=LR;
-node [shape = circle]; q▷;
-node [shape = doublecircle]; q◀; 
-node [shape = circle]
-q▷ -> q0 [label = "x:=600"];
-q0 -> q◀ [label = "y:=45"];
-}
