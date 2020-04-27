@@ -1,0 +1,9 @@
+digraph program_graph {rankdir=LR;
+node [shape = circle]; q▷;
+node [shape = doublecircle]; q◀; 
+node [shape = circle]
+q▷ -> q1 [label = "(x>y)∧(¬false)"];
+q1 -> q◀ [label = "z:=1"];
+q▷ -> q2 [label = "(x<y)∧(¬(x>y))"];
+q2 -> q◀ [label = "z:=2"];
+}

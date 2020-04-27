@@ -1,0 +1,11 @@
+Action: Enter
+Node: q▷
+x: 10
+y: 2
+z:= 0
+
+Action: !(x>0)
+Node: q▷
+x: 10
+y: 2
+z:= 11
