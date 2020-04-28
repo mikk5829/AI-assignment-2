@@ -15,6 +15,9 @@ type a =
 type b =
     | True
     | False
+    | Implication of (b * b)
+    | BiImplication of (b * b)
+    | Not of b
     | ShortAnd of (b * b)
     | ShortOr of (b * b)
     | And of (b * b)

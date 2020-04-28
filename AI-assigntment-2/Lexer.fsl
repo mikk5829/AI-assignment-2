@@ -36,8 +36,6 @@ rule tokenize = parse
 | "false"       { FALSE }
 | '&'           { SHORTAND }
 | '|'           { SHORTOR }
-| "&&"          { AND }
-| "||"          { OR }
 | '!'           { NEG }
 | '='           { EQUAL }
 | "!="          { NEGEQUAL }
@@ -60,4 +58,9 @@ rule tokenize = parse
 | " od"         { OD }
 | "->"          { CONDITION }
 | "[]"          { ELSE }
+| "¬"           { NOT }
+| "∧"           { AND }
+| "∨"           { OR }
+| "→"           { IMPLICATION }
+| "↔"           { BIIMPLICATION }
 | eof           { EOF }
