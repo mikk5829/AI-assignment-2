@@ -25,7 +25,7 @@ state 0:  items:    _startcExpression ->  . cExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -97,66 +97,7 @@ state 1:  items:    _startcExpression -> cExpression .
     action 'error' (noprec):   accept
     action '#' (noprec):   accept
     action '$$' (noprec):   accept
-  immediate action: <none>  gotos:state 2:  items:    dExpression -> aExpression . 
-    aExpression -> aExpression . 'ADDITION' aExpression
-    aExpression -> aExpression . 'SUBTRACT' aExpression
-    aExpression -> aExpression . 'MULTIPLY' aExpression
-    aExpression -> aExpression . 'DIVIDE' aExpression
-    aExpression -> aExpression . 'POWER' aExpression
-    aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
-    bExpression -> aExpression . 'EQUAL' aExpression
-    bExpression -> aExpression . 'NEGEQUAL' aExpression
-    bExpression -> aExpression . 'GT' aExpression
-    bExpression -> aExpression . 'GTE' aExpression
-    bExpression -> aExpression . 'LT' aExpression
-    bExpression -> aExpression . 'LTE' aExpression
-  actions:    action 'NOT' (noprec):   reduce dExpression --> aExpression
-    action 'BIIMPLICATION' (noprec):   reduce dExpression --> aExpression
-    action 'IMPLICATION' (noprec):   reduce dExpression --> aExpression
-    action 'COMMA' (noprec):   reduce dExpression --> aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
-    action 'ZERO' (noprec):   reduce dExpression --> aExpression
-    action 'POWER' (explicit right 9991):   shift 53
-    action 'TRUE' (noprec):   reduce dExpression --> aExpression
-    action 'FALSE' (noprec):   reduce dExpression --> aExpression
-    action 'SHORTAND' (noprec):   reduce dExpression --> aExpression
-    action 'SHORTOR' (noprec):   reduce dExpression --> aExpression
-    action 'AND' (noprec):   reduce dExpression --> aExpression
-    action 'OR' (noprec):   reduce dExpression --> aExpression
-    action 'NEG' (noprec):   reduce dExpression --> aExpression
-    action 'EQUAL' (explicit left 9987):   shift 78
-    action 'NEGEQUAL' (explicit left 9987):   shift 79
-    action 'LT' (explicit left 9987):   shift 82
-    action 'LTE' (explicit left 9987):   shift 83
-    action 'GT' (explicit left 9987):   shift 80
-    action 'GTE' (explicit left 9987):   shift 81
-    action 'LPAR' (noprec):   reduce dExpression --> aExpression
-    action 'RPAR' (noprec):   reduce dExpression --> aExpression
-    action 'LCUR' (noprec):   reduce dExpression --> aExpression
-    action 'RCUR' (noprec):   reduce dExpression --> aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
-    action 'RBRA' (noprec):   reduce dExpression --> aExpression
-    action 'ASSIGN' (noprec):   reduce dExpression --> aExpression
-    action 'ASSIGNARRAY' (noprec):   reduce dExpression --> aExpression
-    action 'SEQUENCE' (noprec):   reduce dExpression --> aExpression
-    action 'SKIP' (noprec):   reduce dExpression --> aExpression
-    action 'IF' (noprec):   reduce dExpression --> aExpression
-    action 'FI' (noprec):   reduce dExpression --> aExpression
-    action 'DO' (noprec):   reduce dExpression --> aExpression
-    action 'OD' (noprec):   reduce dExpression --> aExpression
-    action 'CONDITION' (noprec):   reduce dExpression --> aExpression
-    action 'ELSE' (noprec):   reduce dExpression --> aExpression
-    action 'EOF' (noprec):   reduce dExpression --> aExpression
-    action 'NUM' (noprec):   reduce dExpression --> aExpression
-    action 'VAR' (noprec):   reduce dExpression --> aExpression
-    action 'error' (noprec):   reduce dExpression --> aExpression
-    action '#' (noprec):   reduce dExpression --> aExpression
-    action '$$' (noprec):   reduce dExpression --> aExpression
-  immediate action: <none>  gotos:state 3:  items:    dExpression -> bExpression . 
-    bExpression -> bExpression . 'IMPLICATION' bExpression
+  immediate action: <none>  gotos:state 2:  items:    dExpression -> bExpression . 
     bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
@@ -164,7 +105,7 @@ state 1:  items:    _startcExpression -> cExpression .
     bExpression -> bExpression . 'SHORTOR' bExpression
   actions:    action 'NOT' (noprec):   reduce dExpression --> bExpression
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (noprec):   reduce dExpression --> bExpression
     action 'COMMA' (noprec):   reduce dExpression --> bExpression
     action 'MULTIPLY' (noprec):   reduce dExpression --> bExpression
     action 'DIVIDE' (noprec):   reduce dExpression --> bExpression
@@ -207,6 +148,65 @@ state 1:  items:    _startcExpression -> cExpression .
     action 'error' (noprec):   reduce dExpression --> bExpression
     action '#' (noprec):   reduce dExpression --> bExpression
     action '$$' (noprec):   reduce dExpression --> bExpression
+  immediate action: <none>  gotos:state 3:  items:    dExpression -> aExpression . 
+    aExpression -> aExpression . 'ADDITION' aExpression
+    aExpression -> aExpression . 'SUBTRACT' aExpression
+    aExpression -> aExpression . 'MULTIPLY' aExpression
+    aExpression -> aExpression . 'DIVIDE' aExpression
+    aExpression -> aExpression . 'POWER' aExpression
+    aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
+    bExpression -> aExpression . 'EQUAL' aExpression
+    bExpression -> aExpression . 'NEGEQUAL' aExpression
+    bExpression -> aExpression . 'GT' aExpression
+    bExpression -> aExpression . 'GTE' aExpression
+    bExpression -> aExpression . 'LT' aExpression
+    bExpression -> aExpression . 'LTE' aExpression
+  actions:    action 'NOT' (noprec):   reduce dExpression --> aExpression
+    action 'BIIMPLICATION' (noprec):   reduce dExpression --> aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
+    action 'COMMA' (noprec):   reduce dExpression --> aExpression
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
+    action 'ZERO' (noprec):   reduce dExpression --> aExpression
+    action 'POWER' (explicit right 9991):   shift 54
+    action 'TRUE' (noprec):   reduce dExpression --> aExpression
+    action 'FALSE' (noprec):   reduce dExpression --> aExpression
+    action 'SHORTAND' (noprec):   reduce dExpression --> aExpression
+    action 'SHORTOR' (noprec):   reduce dExpression --> aExpression
+    action 'AND' (noprec):   reduce dExpression --> aExpression
+    action 'OR' (noprec):   reduce dExpression --> aExpression
+    action 'NEG' (noprec):   reduce dExpression --> aExpression
+    action 'EQUAL' (explicit left 9987):   shift 78
+    action 'NEGEQUAL' (explicit left 9987):   shift 79
+    action 'LT' (explicit left 9987):   shift 82
+    action 'LTE' (explicit left 9987):   shift 83
+    action 'GT' (explicit left 9987):   shift 80
+    action 'GTE' (explicit left 9987):   shift 81
+    action 'LPAR' (noprec):   reduce dExpression --> aExpression
+    action 'RPAR' (noprec):   reduce dExpression --> aExpression
+    action 'LCUR' (noprec):   reduce dExpression --> aExpression
+    action 'RCUR' (noprec):   reduce dExpression --> aExpression
+    action 'LBRA' (explicit left 9996):   shift 58
+    action 'RBRA' (noprec):   reduce dExpression --> aExpression
+    action 'ASSIGN' (noprec):   reduce dExpression --> aExpression
+    action 'ASSIGNARRAY' (noprec):   reduce dExpression --> aExpression
+    action 'SEQUENCE' (noprec):   reduce dExpression --> aExpression
+    action 'SKIP' (noprec):   reduce dExpression --> aExpression
+    action 'IF' (noprec):   reduce dExpression --> aExpression
+    action 'FI' (noprec):   reduce dExpression --> aExpression
+    action 'DO' (noprec):   reduce dExpression --> aExpression
+    action 'OD' (noprec):   reduce dExpression --> aExpression
+    action 'CONDITION' (noprec):   reduce dExpression --> aExpression
+    action 'ELSE' (noprec):   reduce dExpression --> aExpression
+    action 'EOF' (noprec):   reduce dExpression --> aExpression
+    action 'NUM' (noprec):   reduce dExpression --> aExpression
+    action 'VAR' (noprec):   reduce dExpression --> aExpression
+    action 'error' (noprec):   reduce dExpression --> aExpression
+    action '#' (noprec):   reduce dExpression --> aExpression
+    action '$$' (noprec):   reduce dExpression --> aExpression
   immediate action: <none>  gotos:state 4:  items:    dExpression -> dExpression . 'COMMA' dExpression
     dExpression -> dExpression 'COMMA' dExpression . 
   actions:    action 'NOT' (explicit left 9985):   reduce dExpression --> dExpression 'COMMA' dExpression
@@ -359,8 +359,8 @@ state 1:  items:    _startcExpression -> cExpression .
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -372,7 +372,7 @@ state 1:  items:    _startcExpression -> cExpression .
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -395,10 +395,9 @@ state 1:  items:    _startcExpression -> cExpression .
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto dExpression: 4
-    goto aExpression: 2
-    goto bExpression: 3
+    goto aExpression: 3
+    goto bExpression: 2
 state 8:  items:    gcExpression -> bExpression . 'CONDITION' bExpression
-    bExpression -> bExpression . 'IMPLICATION' bExpression
     bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
@@ -406,7 +405,7 @@ state 8:  items:    gcExpression -> bExpression . 'CONDITION' bExpression
     bExpression -> bExpression . 'SHORTOR' bExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (noprec):   error
     action 'COMMA' (noprec):   error
     action 'MULTIPLY' (noprec):   error
     action 'DIVIDE' (noprec):   error
@@ -460,8 +459,8 @@ state 8:  items:    gcExpression -> bExpression . 'CONDITION' bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -473,7 +472,7 @@ state 8:  items:    gcExpression -> bExpression . 'CONDITION' bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -495,10 +494,9 @@ state 8:  items:    gcExpression -> bExpression . 'CONDITION' bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
+  immediate action: <none>  gotos:    goto aExpression: 43
     goto bExpression: 10
 state 10:  items:    gcExpression -> bExpression 'CONDITION' bExpression . 
-    bExpression -> bExpression . 'IMPLICATION' bExpression
     bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
@@ -506,7 +504,7 @@ state 10:  items:    gcExpression -> bExpression 'CONDITION' bExpression .
     bExpression -> bExpression . 'SHORTOR' bExpression
   actions:    action 'NOT' (explicit left 9986):   reduce gcExpression --> bExpression 'CONDITION' bExpression
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (explicit left 9986):   reduce gcExpression --> bExpression 'CONDITION' bExpression
     action 'COMMA' (explicit left 9986):   reduce gcExpression --> bExpression 'CONDITION' bExpression
     action 'MULTIPLY' (explicit left 9986):   reduce gcExpression --> bExpression 'CONDITION' bExpression
     action 'DIVIDE' (explicit left 9986):   reduce gcExpression --> bExpression 'CONDITION' bExpression
@@ -701,8 +699,8 @@ state 10:  items:    gcExpression -> bExpression 'CONDITION' bExpression .
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -714,7 +712,7 @@ state 10:  items:    gcExpression -> bExpression 'CONDITION' bExpression .
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -737,7 +735,7 @@ state 10:  items:    gcExpression -> bExpression 'CONDITION' bExpression .
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto gcExpression: 11
-    goto aExpression: 42
+    goto aExpression: 43
     goto bExpression: 8
 state 15:  items:    cExpression -> aExpression . 'EQUAL' 'LCUR' dExpression 'RCUR'
     cExpression -> aExpression . 'ASSIGN' 'LBRA' dExpression 'RBRA'
@@ -748,16 +746,17 @@ state 15:  items:    cExpression -> aExpression . 'EQUAL' 'LCUR' dExpression 'RC
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (noprec):   error
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (noprec):   error
     action 'FALSE' (noprec):   error
     action 'SHORTAND' (noprec):   error
@@ -775,7 +774,7 @@ state 15:  items:    cExpression -> aExpression . 'EQUAL' 'LCUR' dExpression 'RC
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (noprec):   error
     action 'ASSIGN' (explicit left 9986):   shift 22
     action 'ASSIGNARRAY' (noprec):   error
@@ -850,8 +849,8 @@ state 15:  items:    cExpression -> aExpression . 'EQUAL' 'LCUR' dExpression 'RC
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -863,7 +862,7 @@ state 15:  items:    cExpression -> aExpression . 'EQUAL' 'LCUR' dExpression 'RC
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -886,8 +885,8 @@ state 15:  items:    cExpression -> aExpression . 'EQUAL' 'LCUR' dExpression 'RC
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto dExpression: 5
-    goto aExpression: 2
-    goto bExpression: 3
+    goto aExpression: 3
+    goto bExpression: 2
 state 18:  items:    cExpression -> aExpression 'EQUAL' 'LCUR' dExpression 'RCUR' . 
   actions:    action 'NOT' (explicit left 9986):   reduce cExpression --> aExpression 'EQUAL' 'LCUR' dExpression 'RCUR'
     action 'BIIMPLICATION' (explicit left 9986):   reduce cExpression --> aExpression 'EQUAL' 'LCUR' dExpression 'RCUR'
@@ -1054,7 +1053,7 @@ state 18:  items:    cExpression -> aExpression 'EQUAL' 'LCUR' dExpression 'RCUR
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -1103,7 +1102,7 @@ state 22:  items:    cExpression -> aExpression 'ASSIGN' . 'LBRA' dExpression 'R
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -1137,8 +1136,8 @@ state 23:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' . dExpression 'R
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -1150,7 +1149,7 @@ state 23:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' . dExpression 'R
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -1173,8 +1172,8 @@ state 23:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' . dExpression 'R
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto dExpression: 6
-    goto aExpression: 2
-    goto bExpression: 3
+    goto aExpression: 3
+    goto bExpression: 2
 state 24:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' dExpression 'RBRA' . 
   actions:    action 'NOT' (explicit left 9996):   reduce cExpression --> aExpression 'ASSIGN' 'LBRA' dExpression 'RBRA'
     action 'BIIMPLICATION' (explicit left 9996):   reduce cExpression --> aExpression 'ASSIGN' 'LBRA' dExpression 'RBRA'
@@ -1228,16 +1227,17 @@ state 24:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' dExpression 'RBR
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'BIIMPLICATION' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
-    action 'IMPLICATION' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'FALSE' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'SHORTAND' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
@@ -1255,7 +1255,7 @@ state 24:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' dExpression 'RBR
     action 'RPAR' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'LCUR' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'RCUR' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'ASSIGN' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
     action 'ASSIGNARRAY' (explicit left 9986):   reduce cExpression --> aExpression 'ASSIGN' aExpression
@@ -1343,7 +1343,7 @@ state 24:  items:    cExpression -> aExpression 'ASSIGN' 'LBRA' dExpression 'RBR
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -1378,8 +1378,8 @@ state 28:  items:    cExpression -> 'IF' . gcExpression 'FI'
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -1391,7 +1391,7 @@ state 28:  items:    cExpression -> 'IF' . gcExpression 'FI'
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -1414,7 +1414,7 @@ state 28:  items:    cExpression -> 'IF' . gcExpression 'FI'
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto gcExpression: 12
-    goto aExpression: 42
+    goto aExpression: 43
     goto bExpression: 8
 state 29:  items:    cExpression -> 'IF' gcExpression 'FI' . 
   actions:    action 'NOT' (explicit left 9986):   reduce cExpression --> 'IF' gcExpression 'FI'
@@ -1473,8 +1473,8 @@ state 29:  items:    cExpression -> 'IF' gcExpression 'FI' .
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -1486,7 +1486,7 @@ state 29:  items:    cExpression -> 'IF' gcExpression 'FI' .
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -1509,7 +1509,7 @@ state 29:  items:    cExpression -> 'IF' gcExpression 'FI' .
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto gcExpression: 13
-    goto aExpression: 42
+    goto aExpression: 43
     goto bExpression: 8
 state 31:  items:    cExpression -> 'DO' gcExpression 'OD' . 
   actions:    action 'NOT' (explicit left 9986):   reduce cExpression --> 'DO' gcExpression 'OD'
@@ -1656,16 +1656,17 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'BIIMPLICATION' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
-    action 'IMPLICATION' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
     action 'ADDITION' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'FALSE' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'SHORTAND' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
@@ -1683,7 +1684,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'LCUR' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'RCUR' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'ASSIGN' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
     action 'ASSIGNARRAY' (explicit left 9989):   reduce aExpression --> aExpression 'ADDITION' aExpression
@@ -1708,9 +1709,10 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'BIIMPLICATION' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
-    action 'IMPLICATION' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'MULTIPLY' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'DIVIDE' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
@@ -1735,7 +1737,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'LCUR' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'RCUR' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'ASSIGN' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
     action 'ASSIGNARRAY' (explicit left 9992):   reduce aExpression --> aExpression 'SUBTRACT' aExpression
@@ -1760,16 +1762,17 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'BIIMPLICATION' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
-    action 'IMPLICATION' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'MULTIPLY' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'DIVIDE' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'ADDITION' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'FALSE' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'SHORTAND' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
@@ -1787,7 +1790,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'LCUR' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'RCUR' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'ASSIGN' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
     action 'ASSIGNARRAY' (explicit left 9990):   reduce aExpression --> aExpression 'MULTIPLY' aExpression
@@ -1812,16 +1815,17 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression 'DIVIDE' aExpression . 
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'BIIMPLICATION' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
-    action 'IMPLICATION' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'MULTIPLY' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'DIVIDE' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'ADDITION' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'FALSE' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'SHORTAND' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
@@ -1839,7 +1843,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'LCUR' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'RCUR' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'ASSIGN' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
     action 'ASSIGNARRAY' (explicit left 9990):   reduce aExpression --> aExpression 'DIVIDE' aExpression
@@ -1864,16 +1868,17 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression 'POWER' aExpression . 
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'BIIMPLICATION' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
-    action 'IMPLICATION' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'MULTIPLY' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'DIVIDE' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'ADDITION' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'FALSE' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'SHORTAND' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
@@ -1891,7 +1896,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'LCUR' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'RCUR' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'ASSIGN' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
     action 'ASSIGNARRAY' (explicit right 9991):   reduce aExpression --> aExpression 'POWER' aExpression
@@ -1916,16 +1921,17 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> 'LPAR' aExpression . 'RPAR'
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (noprec):   error
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (noprec):   error
     action 'FALSE' (noprec):   error
     action 'SHORTAND' (noprec):   error
@@ -1940,10 +1946,10 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
     action 'LPAR' (noprec):   error
-    action 'RPAR' (explicit left 10000):   shift 56
+    action 'RPAR' (explicit left 10000):   shift 57
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (noprec):   error
     action 'ASSIGN' (noprec):   error
     action 'ASSIGNARRAY' (noprec):   error
@@ -1968,6 +1974,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> 'LPAR' aExpression . 'RPAR'
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression . 'EQUAL' aExpression
     bExpression -> aExpression . 'NEGEQUAL' aExpression
     bExpression -> aExpression . 'GT' aExpression
@@ -1976,14 +1983,14 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     bExpression -> aExpression . 'LTE' aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (noprec):   error
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (noprec):   error
     action 'FALSE' (noprec):   error
     action 'SHORTAND' (noprec):   error
@@ -1998,10 +2005,10 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'GT' (explicit left 9987):   shift 80
     action 'GTE' (explicit left 9987):   shift 81
     action 'LPAR' (noprec):   error
-    action 'RPAR' (explicit left 10000):   shift 56
+    action 'RPAR' (explicit left 10000):   shift 57
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (noprec):   error
     action 'ASSIGN' (noprec):   error
     action 'ASSIGNARRAY' (noprec):   error
@@ -2026,16 +2033,17 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
     aExpression -> aExpression 'LBRA' aExpression . 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (noprec):   error
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (noprec):   error
     action 'FALSE' (noprec):   error
     action 'SHORTAND' (noprec):   error
@@ -2053,8 +2061,8 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
-    action 'LBRA' (explicit left 9996):   shift 57
-    action 'RBRA' (explicit left 9996):   shift 58
+    action 'LBRA' (explicit left 9996):   shift 58
+    action 'RBRA' (explicit left 9996):   shift 59
     action 'ASSIGN' (noprec):   error
     action 'ASSIGNARRAY' (noprec):   error
     action 'SEQUENCE' (noprec):   error
@@ -2077,6 +2085,60 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
+    aExpression -> aExpression 'IMPLICATION' aExpression . 
+  actions:    action 'NOT' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'BIIMPLICATION' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'IMPLICATION' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'COMMA' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'MULTIPLY' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'DIVIDE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'ADDITION' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'SUBTRACT' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'ZERO' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'POWER' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'TRUE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'FALSE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'SHORTAND' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'SHORTOR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'AND' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'OR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'NEG' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'EQUAL' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'NEGEQUAL' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'LT' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'LTE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'GT' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'GTE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'LPAR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'RPAR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'LCUR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'RCUR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'LBRA' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'RBRA' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'ASSIGN' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'ASSIGNARRAY' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'SEQUENCE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'SKIP' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'IF' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'FI' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'DO' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'OD' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'CONDITION' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'ELSE' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'EOF' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'NUM' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'VAR' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action 'error' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action '#' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+    action '$$' (explicit left 9997):   reduce aExpression --> aExpression 'IMPLICATION' aExpression
+  immediate action: <none>  gotos:state 43:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+    aExpression -> aExpression . 'SUBTRACT' aExpression
+    aExpression -> aExpression . 'MULTIPLY' aExpression
+    aExpression -> aExpression . 'DIVIDE' aExpression
+    aExpression -> aExpression . 'POWER' aExpression
+    aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression . 'EQUAL' aExpression
     bExpression -> aExpression . 'NEGEQUAL' aExpression
     bExpression -> aExpression . 'GT' aExpression
@@ -2085,14 +2147,14 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     bExpression -> aExpression . 'LTE' aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (noprec):   error
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (noprec):   error
     action 'FALSE' (noprec):   error
     action 'SHORTAND' (noprec):   error
@@ -2110,7 +2172,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (noprec):   error
     action 'ASSIGN' (noprec):   error
     action 'ASSIGNARRAY' (noprec):   error
@@ -2128,23 +2190,24 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:state 43:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+  immediate action: <none>  gotos:state 44:  items:    aExpression -> aExpression . 'ADDITION' aExpression
     aExpression -> aExpression . 'SUBTRACT' aExpression
     aExpression -> aExpression . 'MULTIPLY' aExpression
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression 'EQUAL' aExpression . 
   actions:    action 'NOT' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'BIIMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
-    action 'IMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'FALSE' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'SHORTAND' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
@@ -2162,7 +2225,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'LCUR' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'RCUR' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'ASSIGN' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action 'ASSIGNARRAY' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
@@ -2180,23 +2243,24 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action '#' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
     action '$$' (explicit left 9987):   reduce bExpression --> aExpression 'EQUAL' aExpression
-  immediate action: <none>  gotos:state 44:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+  immediate action: <none>  gotos:state 45:  items:    aExpression -> aExpression . 'ADDITION' aExpression
     aExpression -> aExpression . 'SUBTRACT' aExpression
     aExpression -> aExpression . 'MULTIPLY' aExpression
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression 'NEGEQUAL' aExpression . 
   actions:    action 'NOT' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'BIIMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
-    action 'IMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'FALSE' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'SHORTAND' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
@@ -2214,7 +2278,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'LCUR' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'RCUR' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'ASSIGN' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action 'ASSIGNARRAY' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
@@ -2232,23 +2296,24 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action '#' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
     action '$$' (explicit left 9987):   reduce bExpression --> aExpression 'NEGEQUAL' aExpression
-  immediate action: <none>  gotos:state 45:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+  immediate action: <none>  gotos:state 46:  items:    aExpression -> aExpression . 'ADDITION' aExpression
     aExpression -> aExpression . 'SUBTRACT' aExpression
     aExpression -> aExpression . 'MULTIPLY' aExpression
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression 'GT' aExpression . 
   actions:    action 'NOT' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'BIIMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
-    action 'IMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'FALSE' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'SHORTAND' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
@@ -2266,7 +2331,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'LCUR' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'RCUR' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'ASSIGN' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action 'ASSIGNARRAY' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
@@ -2284,23 +2349,24 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action '#' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
     action '$$' (explicit left 9987):   reduce bExpression --> aExpression 'GT' aExpression
-  immediate action: <none>  gotos:state 46:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+  immediate action: <none>  gotos:state 47:  items:    aExpression -> aExpression . 'ADDITION' aExpression
     aExpression -> aExpression . 'SUBTRACT' aExpression
     aExpression -> aExpression . 'MULTIPLY' aExpression
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression 'GTE' aExpression . 
   actions:    action 'NOT' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'BIIMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
-    action 'IMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'FALSE' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'SHORTAND' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
@@ -2318,7 +2384,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'LCUR' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'RCUR' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'ASSIGN' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action 'ASSIGNARRAY' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
@@ -2336,23 +2402,24 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action '#' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
     action '$$' (explicit left 9987):   reduce bExpression --> aExpression 'GTE' aExpression
-  immediate action: <none>  gotos:state 47:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+  immediate action: <none>  gotos:state 48:  items:    aExpression -> aExpression . 'ADDITION' aExpression
     aExpression -> aExpression . 'SUBTRACT' aExpression
     aExpression -> aExpression . 'MULTIPLY' aExpression
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression 'LT' aExpression . 
   actions:    action 'NOT' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'BIIMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
-    action 'IMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'FALSE' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'SHORTAND' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
@@ -2370,7 +2437,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'LCUR' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'RCUR' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'ASSIGN' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action 'ASSIGNARRAY' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
@@ -2388,23 +2455,24 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action '#' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
     action '$$' (explicit left 9987):   reduce bExpression --> aExpression 'LT' aExpression
-  immediate action: <none>  gotos:state 48:  items:    aExpression -> aExpression . 'ADDITION' aExpression
+  immediate action: <none>  gotos:state 49:  items:    aExpression -> aExpression . 'ADDITION' aExpression
     aExpression -> aExpression . 'SUBTRACT' aExpression
     aExpression -> aExpression . 'MULTIPLY' aExpression
     aExpression -> aExpression . 'DIVIDE' aExpression
     aExpression -> aExpression . 'POWER' aExpression
     aExpression -> aExpression . 'LBRA' aExpression 'RBRA'
+    aExpression -> aExpression . 'IMPLICATION' aExpression
     bExpression -> aExpression 'LTE' aExpression . 
   actions:    action 'NOT' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'BIIMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
-    action 'IMPLICATION' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
+    action 'IMPLICATION' (explicit left 9997):   shift 60
     action 'COMMA' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
-    action 'MULTIPLY' (explicit left 9990):   shift 51
-    action 'DIVIDE' (explicit left 9990):   shift 52
-    action 'ADDITION' (explicit left 9989):   shift 49
-    action 'SUBTRACT' (explicit left 9992):   shift 50
+    action 'MULTIPLY' (explicit left 9990):   shift 52
+    action 'DIVIDE' (explicit left 9990):   shift 53
+    action 'ADDITION' (explicit left 9989):   shift 50
+    action 'SUBTRACT' (explicit left 9992):   shift 51
     action 'ZERO' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
-    action 'POWER' (explicit right 9991):   shift 53
+    action 'POWER' (explicit right 9991):   shift 54
     action 'TRUE' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'FALSE' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'SHORTAND' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
@@ -2422,7 +2490,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'RPAR' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'LCUR' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'RCUR' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
-    action 'LBRA' (explicit left 9996):   shift 57
+    action 'LBRA' (explicit left 9996):   shift 58
     action 'RBRA' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'ASSIGN' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action 'ASSIGNARRAY' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
@@ -2440,7 +2508,7 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'error' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action '#' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
     action '$$' (explicit left 9987):   reduce bExpression --> aExpression 'LTE' aExpression
-  immediate action: <none>  gotos:state 49:  items:    aExpression -> aExpression 'ADDITION' . aExpression
+  immediate action: <none>  gotos:state 50:  items:    aExpression -> aExpression 'ADDITION' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
     action 'IMPLICATION' (noprec):   error
@@ -2458,289 +2526,6 @@ state 31:  items:    cExpression -> 'DO' gcExpression 'OD' .
     action 'AND' (noprec):   error
     action 'OR' (noprec):   error
     action 'NEG' (noprec):   error
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 34
-state 50:  items:    aExpression -> aExpression 'SUBTRACT' . aExpression
-  actions:    action 'NOT' (noprec):   error
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (noprec):   error
-    action 'FALSE' (noprec):   error
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (noprec):   error
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 35
-state 51:  items:    aExpression -> aExpression 'MULTIPLY' . aExpression
-  actions:    action 'NOT' (noprec):   error
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (noprec):   error
-    action 'FALSE' (noprec):   error
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (noprec):   error
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 36
-state 52:  items:    aExpression -> aExpression 'DIVIDE' . aExpression
-  actions:    action 'NOT' (noprec):   error
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (noprec):   error
-    action 'FALSE' (noprec):   error
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (noprec):   error
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 37
-state 53:  items:    aExpression -> aExpression 'POWER' . aExpression
-  actions:    action 'NOT' (noprec):   error
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (noprec):   error
-    action 'FALSE' (noprec):   error
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (noprec):   error
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 38
-state 54:  items:    aExpression -> 'LPAR' . aExpression 'RPAR'
-  actions:    action 'NOT' (noprec):   error
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (noprec):   error
-    action 'FALSE' (noprec):   error
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (noprec):   error
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 39
-state 55:  items:    aExpression -> 'LPAR' . aExpression 'RPAR'
-    bExpression -> 'LPAR' . bExpression 'RPAR'
-  actions:    action 'NOT' (explicit left 9999):   shift 72
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (explicit left 9995):   shift 77
     action 'EQUAL' (noprec):   error
     action 'NEGEQUAL' (noprec):   error
     action 'LT' (noprec):   error
@@ -2769,9 +2554,292 @@ state 55:  items:    aExpression -> 'LPAR' . aExpression 'RPAR'
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 34
+state 51:  items:    aExpression -> aExpression 'SUBTRACT' . aExpression
+  actions:    action 'NOT' (noprec):   error
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (noprec):   error
+    action 'FALSE' (noprec):   error
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (noprec):   error
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 55
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 35
+state 52:  items:    aExpression -> aExpression 'MULTIPLY' . aExpression
+  actions:    action 'NOT' (noprec):   error
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (noprec):   error
+    action 'FALSE' (noprec):   error
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (noprec):   error
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 55
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 36
+state 53:  items:    aExpression -> aExpression 'DIVIDE' . aExpression
+  actions:    action 'NOT' (noprec):   error
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (noprec):   error
+    action 'FALSE' (noprec):   error
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (noprec):   error
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 55
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 37
+state 54:  items:    aExpression -> aExpression 'POWER' . aExpression
+  actions:    action 'NOT' (noprec):   error
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (noprec):   error
+    action 'FALSE' (noprec):   error
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (noprec):   error
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 55
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 38
+state 55:  items:    aExpression -> 'LPAR' . aExpression 'RPAR'
+  actions:    action 'NOT' (noprec):   error
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (noprec):   error
+    action 'FALSE' (noprec):   error
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (noprec):   error
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 55
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 39
+state 56:  items:    aExpression -> 'LPAR' . aExpression 'RPAR'
+    bExpression -> 'LPAR' . bExpression 'RPAR'
+  actions:    action 'NOT' (explicit left 9999):   shift 72
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (explicit left 9995):   shift 77
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 56
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto aExpression: 40
-    goto bExpression: 69
-state 56:  items:    aExpression -> 'LPAR' aExpression 'RPAR' . 
+    goto bExpression: 70
+state 57:  items:    aExpression -> 'LPAR' aExpression 'RPAR' . 
   actions:    action 'NOT' (explicit left 10000):   reduce aExpression --> 'LPAR' aExpression 'RPAR'
     action 'BIIMPLICATION' (explicit left 10000):   reduce aExpression --> 'LPAR' aExpression 'RPAR'
     action 'IMPLICATION' (explicit left 10000):   reduce aExpression --> 'LPAR' aExpression 'RPAR'
@@ -2817,7 +2885,7 @@ state 56:  items:    aExpression -> 'LPAR' aExpression 'RPAR' .
     action 'error' (explicit left 10000):   reduce aExpression --> 'LPAR' aExpression 'RPAR'
     action '#' (explicit left 10000):   reduce aExpression --> 'LPAR' aExpression 'RPAR'
     action '$$' (explicit left 10000):   reduce aExpression --> 'LPAR' aExpression 'RPAR'
-  immediate action:   reduce aExpression --> 'LPAR' aExpression 'RPAR'  gotos:state 57:  items:    aExpression -> aExpression 'LBRA' . aExpression 'RBRA'
+  immediate action:   reduce aExpression --> 'LPAR' aExpression 'RPAR'  gotos:state 58:  items:    aExpression -> aExpression 'LBRA' . aExpression 'RBRA'
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
     action 'IMPLICATION' (noprec):   error
@@ -2841,7 +2909,7 @@ state 56:  items:    aExpression -> 'LPAR' aExpression 'RPAR' .
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -2864,7 +2932,7 @@ state 56:  items:    aExpression -> 'LPAR' aExpression 'RPAR' .
     action '#' (noprec):   error
     action '$$' (noprec):   error
   immediate action: <none>  gotos:    goto aExpression: 41
-state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' . 
+state 59:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' . 
   actions:    action 'NOT' (explicit left 9996):   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'
     action 'BIIMPLICATION' (explicit left 9996):   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'
     action 'IMPLICATION' (explicit left 9996):   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'
@@ -2910,7 +2978,54 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9996):   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'
     action '#' (explicit left 9996):   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'
     action '$$' (explicit left 9996):   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'
-  immediate action:   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'  gotos:state 59:  items:    bExpression -> 'TRUE' . 
+  immediate action:   reduce aExpression --> aExpression 'LBRA' aExpression 'RBRA'  gotos:state 60:  items:    aExpression -> aExpression 'IMPLICATION' . aExpression
+  actions:    action 'NOT' (noprec):   error
+    action 'BIIMPLICATION' (noprec):   error
+    action 'IMPLICATION' (noprec):   error
+    action 'COMMA' (noprec):   error
+    action 'MULTIPLY' (noprec):   error
+    action 'DIVIDE' (noprec):   error
+    action 'ADDITION' (noprec):   error
+    action 'SUBTRACT' (noprec):   error
+    action 'ZERO' (noprec):   error
+    action 'POWER' (noprec):   error
+    action 'TRUE' (noprec):   error
+    action 'FALSE' (noprec):   error
+    action 'SHORTAND' (noprec):   error
+    action 'SHORTOR' (noprec):   error
+    action 'AND' (noprec):   error
+    action 'OR' (noprec):   error
+    action 'NEG' (noprec):   error
+    action 'EQUAL' (noprec):   error
+    action 'NEGEQUAL' (noprec):   error
+    action 'LT' (noprec):   error
+    action 'LTE' (noprec):   error
+    action 'GT' (noprec):   error
+    action 'GTE' (noprec):   error
+    action 'LPAR' (explicit left 10000):   shift 55
+    action 'RPAR' (noprec):   error
+    action 'LCUR' (noprec):   error
+    action 'RCUR' (noprec):   error
+    action 'LBRA' (noprec):   error
+    action 'RBRA' (noprec):   error
+    action 'ASSIGN' (noprec):   error
+    action 'ASSIGNARRAY' (noprec):   error
+    action 'SEQUENCE' (noprec):   error
+    action 'SKIP' (noprec):   error
+    action 'IF' (noprec):   error
+    action 'FI' (noprec):   error
+    action 'DO' (noprec):   error
+    action 'OD' (noprec):   error
+    action 'CONDITION' (noprec):   error
+    action 'ELSE' (noprec):   error
+    action 'EOF' (noprec):   error
+    action 'NUM' (noprec):   shift 32
+    action 'VAR' (noprec):   shift 33
+    action 'error' (noprec):   error
+    action '#' (noprec):   error
+    action '$$' (noprec):   error
+  immediate action: <none>  gotos:    goto aExpression: 42
+state 61:  items:    bExpression -> 'TRUE' . 
   actions:    action 'NOT' (explicit left 9986):   reduce bExpression --> 'TRUE'
     action 'BIIMPLICATION' (explicit left 9986):   reduce bExpression --> 'TRUE'
     action 'IMPLICATION' (explicit left 9986):   reduce bExpression --> 'TRUE'
@@ -2956,7 +3071,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9986):   reduce bExpression --> 'TRUE'
     action '#' (explicit left 9986):   reduce bExpression --> 'TRUE'
     action '$$' (explicit left 9986):   reduce bExpression --> 'TRUE'
-  immediate action:   reduce bExpression --> 'TRUE'  gotos:state 60:  items:    bExpression -> 'FALSE' . 
+  immediate action:   reduce bExpression --> 'TRUE'  gotos:state 62:  items:    bExpression -> 'FALSE' . 
   actions:    action 'NOT' (explicit left 9986):   reduce bExpression --> 'FALSE'
     action 'BIIMPLICATION' (explicit left 9986):   reduce bExpression --> 'FALSE'
     action 'IMPLICATION' (explicit left 9986):   reduce bExpression --> 'FALSE'
@@ -3002,60 +3117,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9986):   reduce bExpression --> 'FALSE'
     action '#' (explicit left 9986):   reduce bExpression --> 'FALSE'
     action '$$' (explicit left 9986):   reduce bExpression --> 'FALSE'
-  immediate action:   reduce bExpression --> 'FALSE'  gotos:state 61:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression 'IMPLICATION' bExpression . 
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
-    bExpression -> bExpression . 'AND' bExpression
-    bExpression -> bExpression . 'OR' bExpression
-    bExpression -> bExpression . 'SHORTAND' bExpression
-    bExpression -> bExpression . 'SHORTOR' bExpression
-  actions:    action 'NOT' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'BIIMPLICATION' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'IMPLICATION' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'COMMA' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'MULTIPLY' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'DIVIDE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'ADDITION' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'SUBTRACT' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'ZERO' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'POWER' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'TRUE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'FALSE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'SHORTAND' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'SHORTOR' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'AND' (explicit left 9998):   shift 73
-    action 'OR' (explicit left 9998):   shift 74
-    action 'NEG' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'EQUAL' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'NEGEQUAL' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'LT' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'LTE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'GT' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'GTE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'LPAR' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'RPAR' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'LCUR' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'RCUR' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'LBRA' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'RBRA' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'ASSIGN' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'ASSIGNARRAY' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'SEQUENCE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'SKIP' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'IF' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'FI' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'DO' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'OD' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'CONDITION' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'ELSE' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'EOF' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'NUM' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'VAR' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action 'error' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action '#' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-    action '$$' (explicit left 9997):   reduce bExpression --> bExpression 'IMPLICATION' bExpression
-  immediate action: <none>  gotos:state 62:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action:   reduce bExpression --> 'FALSE'  gotos:state 63:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression 'BIIMPLICATION' bExpression . 
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
@@ -3106,8 +3168,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9997):   reduce bExpression --> bExpression 'BIIMPLICATION' bExpression
     action '#' (explicit left 9997):   reduce bExpression --> bExpression 'BIIMPLICATION' bExpression
     action '$$' (explicit left 9997):   reduce bExpression --> bExpression 'BIIMPLICATION' bExpression
-  immediate action: <none>  gotos:state 63:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 64:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> 'NOT' bExpression . 
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
@@ -3158,8 +3219,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9999):   reduce bExpression --> 'NOT' bExpression
     action '#' (explicit left 9999):   reduce bExpression --> 'NOT' bExpression
     action '$$' (explicit left 9999):   reduce bExpression --> 'NOT' bExpression
-  immediate action: <none>  gotos:state 64:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 65:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression 'AND' bExpression . 
     bExpression -> bExpression . 'OR' bExpression
@@ -3210,8 +3270,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9998):   reduce bExpression --> bExpression 'AND' bExpression
     action '#' (explicit left 9998):   reduce bExpression --> bExpression 'AND' bExpression
     action '$$' (explicit left 9998):   reduce bExpression --> bExpression 'AND' bExpression
-  immediate action: <none>  gotos:state 65:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 66:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
     bExpression -> bExpression 'OR' bExpression . 
@@ -3262,8 +3321,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9998):   reduce bExpression --> bExpression 'OR' bExpression
     action '#' (explicit left 9998):   reduce bExpression --> bExpression 'OR' bExpression
     action '$$' (explicit left 9998):   reduce bExpression --> bExpression 'OR' bExpression
-  immediate action: <none>  gotos:state 66:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 67:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
     bExpression -> bExpression . 'SHORTAND' bExpression
@@ -3271,7 +3329,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     bExpression -> bExpression . 'SHORTOR' bExpression
   actions:    action 'NOT' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
     action 'COMMA' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
     action 'MULTIPLY' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
     action 'DIVIDE' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
@@ -3314,8 +3372,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
     action '#' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
     action '$$' (explicit left 9994):   reduce bExpression --> bExpression 'SHORTAND' bExpression
-  immediate action: <none>  gotos:state 67:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 68:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
     bExpression -> bExpression . 'SHORTAND' bExpression
@@ -3323,7 +3380,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     bExpression -> bExpression 'SHORTOR' bExpression . 
   actions:    action 'NOT' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
     action 'COMMA' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
     action 'MULTIPLY' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
     action 'DIVIDE' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
@@ -3366,8 +3423,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
     action '#' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
     action '$$' (explicit left 9993):   reduce bExpression --> bExpression 'SHORTOR' bExpression
-  immediate action: <none>  gotos:state 68:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 69:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
     bExpression -> bExpression . 'SHORTAND' bExpression
@@ -3375,7 +3431,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     bExpression -> 'NEG' bExpression . 
   actions:    action 'NOT' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
     action 'COMMA' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
     action 'MULTIPLY' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
     action 'DIVIDE' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
@@ -3418,8 +3474,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
     action '#' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
     action '$$' (explicit left 9995):   reduce bExpression --> 'NEG' bExpression
-  immediate action: <none>  gotos:state 69:  items:    bExpression -> bExpression . 'IMPLICATION' bExpression
-    bExpression -> bExpression . 'BIIMPLICATION' bExpression
+  immediate action: <none>  gotos:state 70:  items:    bExpression -> bExpression . 'BIIMPLICATION' bExpression
     bExpression -> bExpression . 'AND' bExpression
     bExpression -> bExpression . 'OR' bExpression
     bExpression -> bExpression . 'SHORTAND' bExpression
@@ -3427,7 +3482,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     bExpression -> 'LPAR' bExpression . 'RPAR'
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (explicit left 9997):   shift 71
-    action 'IMPLICATION' (explicit left 9997):   shift 70
+    action 'IMPLICATION' (noprec):   error
     action 'COMMA' (noprec):   error
     action 'MULTIPLY' (noprec):   error
     action 'DIVIDE' (noprec):   error
@@ -3470,7 +3525,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:state 70:  items:    bExpression -> bExpression 'IMPLICATION' . bExpression
+  immediate action: <none>  gotos:state 71:  items:    bExpression -> bExpression 'BIIMPLICATION' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
     action 'IMPLICATION' (noprec):   error
@@ -3481,8 +3536,8 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3494,7 +3549,7 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3516,56 +3571,8 @@ state 58:  items:    aExpression -> aExpression 'LBRA' aExpression 'RBRA' .
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 61
-state 71:  items:    bExpression -> bExpression 'BIIMPLICATION' . bExpression
-  actions:    action 'NOT' (explicit left 9999):   shift 72
-    action 'BIIMPLICATION' (noprec):   error
-    action 'IMPLICATION' (noprec):   error
-    action 'COMMA' (noprec):   error
-    action 'MULTIPLY' (noprec):   error
-    action 'DIVIDE' (noprec):   error
-    action 'ADDITION' (noprec):   error
-    action 'SUBTRACT' (noprec):   error
-    action 'ZERO' (noprec):   error
-    action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
-    action 'SHORTAND' (noprec):   error
-    action 'SHORTOR' (noprec):   error
-    action 'AND' (noprec):   error
-    action 'OR' (noprec):   error
-    action 'NEG' (explicit left 9995):   shift 77
-    action 'EQUAL' (noprec):   error
-    action 'NEGEQUAL' (noprec):   error
-    action 'LT' (noprec):   error
-    action 'LTE' (noprec):   error
-    action 'GT' (noprec):   error
-    action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
-    action 'RPAR' (noprec):   error
-    action 'LCUR' (noprec):   error
-    action 'RCUR' (noprec):   error
-    action 'LBRA' (noprec):   error
-    action 'RBRA' (noprec):   error
-    action 'ASSIGN' (noprec):   error
-    action 'ASSIGNARRAY' (noprec):   error
-    action 'SEQUENCE' (noprec):   error
-    action 'SKIP' (noprec):   error
-    action 'IF' (noprec):   error
-    action 'FI' (noprec):   error
-    action 'DO' (noprec):   error
-    action 'OD' (noprec):   error
-    action 'CONDITION' (noprec):   error
-    action 'ELSE' (noprec):   error
-    action 'EOF' (noprec):   error
-    action 'NUM' (noprec):   shift 32
-    action 'VAR' (noprec):   shift 33
-    action 'error' (noprec):   error
-    action '#' (noprec):   error
-    action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 62
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 63
 state 72:  items:    bExpression -> 'NOT' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
@@ -3577,8 +3584,8 @@ state 72:  items:    bExpression -> 'NOT' . bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3590,7 +3597,7 @@ state 72:  items:    bExpression -> 'NOT' . bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3612,8 +3619,8 @@ state 72:  items:    bExpression -> 'NOT' . bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 63
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 64
 state 73:  items:    bExpression -> bExpression 'AND' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
@@ -3625,8 +3632,8 @@ state 73:  items:    bExpression -> bExpression 'AND' . bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3638,7 +3645,7 @@ state 73:  items:    bExpression -> bExpression 'AND' . bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3660,8 +3667,8 @@ state 73:  items:    bExpression -> bExpression 'AND' . bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 64
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 65
 state 74:  items:    bExpression -> bExpression 'OR' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
@@ -3673,8 +3680,8 @@ state 74:  items:    bExpression -> bExpression 'OR' . bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3686,7 +3693,7 @@ state 74:  items:    bExpression -> bExpression 'OR' . bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3708,8 +3715,8 @@ state 74:  items:    bExpression -> bExpression 'OR' . bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 65
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 66
 state 75:  items:    bExpression -> bExpression 'SHORTAND' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
@@ -3721,8 +3728,8 @@ state 75:  items:    bExpression -> bExpression 'SHORTAND' . bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3734,7 +3741,7 @@ state 75:  items:    bExpression -> bExpression 'SHORTAND' . bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3756,8 +3763,8 @@ state 75:  items:    bExpression -> bExpression 'SHORTAND' . bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 66
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 67
 state 76:  items:    bExpression -> bExpression 'SHORTOR' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
@@ -3769,8 +3776,8 @@ state 76:  items:    bExpression -> bExpression 'SHORTOR' . bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3782,7 +3789,7 @@ state 76:  items:    bExpression -> bExpression 'SHORTOR' . bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3804,8 +3811,8 @@ state 76:  items:    bExpression -> bExpression 'SHORTOR' . bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 67
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 68
 state 77:  items:    bExpression -> 'NEG' . bExpression
   actions:    action 'NOT' (explicit left 9999):   shift 72
     action 'BIIMPLICATION' (noprec):   error
@@ -3817,8 +3824,8 @@ state 77:  items:    bExpression -> 'NEG' . bExpression
     action 'SUBTRACT' (noprec):   error
     action 'ZERO' (noprec):   error
     action 'POWER' (noprec):   error
-    action 'TRUE' (explicit left 9986):   shift 59
-    action 'FALSE' (explicit left 9986):   shift 60
+    action 'TRUE' (explicit left 9986):   shift 61
+    action 'FALSE' (explicit left 9986):   shift 62
     action 'SHORTAND' (noprec):   error
     action 'SHORTOR' (noprec):   error
     action 'AND' (noprec):   error
@@ -3830,7 +3837,7 @@ state 77:  items:    bExpression -> 'NEG' . bExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 55
+    action 'LPAR' (explicit left 10000):   shift 56
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3852,8 +3859,8 @@ state 77:  items:    bExpression -> 'NEG' . bExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 42
-    goto bExpression: 68
+  immediate action: <none>  gotos:    goto aExpression: 43
+    goto bExpression: 69
 state 78:  items:    bExpression -> aExpression 'EQUAL' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
@@ -3878,7 +3885,7 @@ state 78:  items:    bExpression -> aExpression 'EQUAL' . aExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3900,7 +3907,7 @@ state 78:  items:    bExpression -> aExpression 'EQUAL' . aExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 43
+  immediate action: <none>  gotos:    goto aExpression: 44
 state 79:  items:    bExpression -> aExpression 'NEGEQUAL' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
@@ -3925,7 +3932,7 @@ state 79:  items:    bExpression -> aExpression 'NEGEQUAL' . aExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3947,7 +3954,7 @@ state 79:  items:    bExpression -> aExpression 'NEGEQUAL' . aExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 44
+  immediate action: <none>  gotos:    goto aExpression: 45
 state 80:  items:    bExpression -> aExpression 'GT' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
@@ -3972,7 +3979,7 @@ state 80:  items:    bExpression -> aExpression 'GT' . aExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -3994,7 +4001,7 @@ state 80:  items:    bExpression -> aExpression 'GT' . aExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 45
+  immediate action: <none>  gotos:    goto aExpression: 46
 state 81:  items:    bExpression -> aExpression 'GTE' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
@@ -4019,7 +4026,7 @@ state 81:  items:    bExpression -> aExpression 'GTE' . aExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -4041,7 +4048,7 @@ state 81:  items:    bExpression -> aExpression 'GTE' . aExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 46
+  immediate action: <none>  gotos:    goto aExpression: 47
 state 82:  items:    bExpression -> aExpression 'LT' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
@@ -4066,7 +4073,7 @@ state 82:  items:    bExpression -> aExpression 'LT' . aExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -4088,7 +4095,7 @@ state 82:  items:    bExpression -> aExpression 'LT' . aExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 47
+  immediate action: <none>  gotos:    goto aExpression: 48
 state 83:  items:    bExpression -> aExpression 'LTE' . aExpression
   actions:    action 'NOT' (noprec):   error
     action 'BIIMPLICATION' (noprec):   error
@@ -4113,7 +4120,7 @@ state 83:  items:    bExpression -> aExpression 'LTE' . aExpression
     action 'LTE' (noprec):   error
     action 'GT' (noprec):   error
     action 'GTE' (noprec):   error
-    action 'LPAR' (explicit left 10000):   shift 54
+    action 'LPAR' (explicit left 10000):   shift 55
     action 'RPAR' (noprec):   error
     action 'LCUR' (noprec):   error
     action 'RCUR' (noprec):   error
@@ -4135,7 +4142,7 @@ state 83:  items:    bExpression -> aExpression 'LTE' . aExpression
     action 'error' (noprec):   error
     action '#' (noprec):   error
     action '$$' (noprec):   error
-  immediate action: <none>  gotos:    goto aExpression: 48
+  immediate action: <none>  gotos:    goto aExpression: 49
 state 84:  items:    bExpression -> 'LPAR' bExpression 'RPAR' . 
   actions:    action 'NOT' (explicit left 10000):   reduce bExpression --> 'LPAR' bExpression 'RPAR'
     action 'BIIMPLICATION' (explicit left 10000):   reduce bExpression --> 'LPAR' bExpression 'RPAR'

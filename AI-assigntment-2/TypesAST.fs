@@ -4,24 +4,23 @@ module TypesAST
     
 type a =
     | Num of float
-    | Var of string
+    | True of string
+    | Not of a
     | Array of (a * a)
     | Addition of (a * a)
     | Subtract of (a * a)
     | Multiply of (a * a)
     | Divide of (a * a)
     | Power of (a * a)
+    | Implication of (a * a)
+    | BiImplication of (a * a)
+    | And of (a * a)
+    | Or of (a * a)
 
-type Predicate =
-    | True
+and Predicate =
     | False
-    | Implication of (Predicate * Predicate)
-    | BiImplication of (Predicate * Predicate)
-    | Not of Predicate
     | ShortAnd of (Predicate * Predicate)
     | ShortOr of (Predicate * Predicate)
-    | And of (Predicate * Predicate)
-    | Or of (Predicate * Predicate)
     | Negate of Predicate
     | Equal of (a * a)
     | NotEqual of (a * a)
@@ -31,13 +30,12 @@ type Predicate =
     | LessEqual of (a * a)
 
 type C =
-    | BelievesSet of (a * D) // Ex. B = {p, q, p → ¬q}
+    | BelievesSet of (string * D) // Ex. B = {p, q, p → ¬q}
     | InitialArraySequence of (a * C)
     | InitialValues of (C * C) // C,C
     | InitialAssign of (a * a) // a = a - Only works when called from InitialValues sequence
     | InitialArray of (a * D) // a := [a,...,a]
     | Assign of (a * a) // x := a
-
     | AssignArray of (a * a) // A[a] := a
     | Skip // skip
     | Sequence of (C * C) // C; C
@@ -49,40 +47,5 @@ and GC =
     | Else of (GC * GC) // GC [] GC
 
 and D =
-    | PredicateAssign of Predicate
-    | ArrayNum of a
-    | InitialArraySequence of (D * D)
-
-// Types for Sign Analysis
-type SignC =
-    | AssignSign of (string * SignA)
-    | AssignSignSet of (string * SignA)
-    | SignSequence of (SignC * SignC)
-and SignA =
-  | SignNum of float
-  | SignVar of string
-  | SetSequence of (SignA * SignA)
-  | PositiveSign
-  | NegativeSign
-  | ZeroSign
-  | SignAdd of (SignA * SignA)
-  | SignSub of (SignA * SignA)
-  | SignMul of (SignA * SignA)
-  | SignDiv of (SignA * SignA)
-//and SignB =
-//  | 
-
-type InitSignC =
-    | InitSign of (string * InitSignA)
-    | InitSignSet of (string * InitSignA)
-    | InitSequence of (InitSignC * InitSignC)
-and InitSignA =
-  | InitNumSign of float
-  | InitSignSequence of (InitSignA * InitSignA)
-  | InitPositiveSign
-  | InitNegativeSign
-  | InitZeroSign
-
-type InitSecC =
-    | InitSec of (string * string)
-    | InitSecSequence of (InitSecC * InitSecC)
+    | Belief of a
+    | BelievesSetSequence of (D * D)

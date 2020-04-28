@@ -55,14 +55,13 @@ open TypesAST
 // written in the yacc format:
 
 dExpression:
-  | aExpression { ArrayNum($1) }
-  | bExpression { PredicateAssign($1) }
-  | dExpression COMMA dExpression { InitialArraySequence($1,$3) }
+  | aExpression { Belief($1) }
+  | dExpression COMMA dExpression { BelievesSetSequence($1,$3) }
 gcExpression:
   | bExpression CONDITION bExpression { Condition($1,$3) }
   | gcExpression ELSE gcExpression   { Else($1,$3) }
 cExpression:
-  | aExpression EQUAL LCUR dExpression RCUR {BelievesSet($1,$4)}
+  | VAR EQUAL LCUR dExpression RCUR {BelievesSet($1,$4)}
   | cExpression COMMA cExpression { InitialValues($1,$3) }
   | aExpression ASSIGN LBRA dExpression RBRA { InitialArray($1,$4) }
   | aExpression ASSIGN aExpression   { Assign($1,$3)}
@@ -73,7 +72,10 @@ cExpression:
   | DO gcExpression OD               { DoOd($2) }
 aExpression:
   | NUM                               { Num($1) }
-  | VAR                               { Var($1) } 
+  | VAR                               { True($1) } 
+  | NOT aExpression                   {Not($2)}
+  | aExpression AND aExpression       { And($1,$3) }
+  | aExpression OR aExpression        { Or($1,$3) }
   | aExpression ADDITION aExpression  { Addition($1,$3) }
   | aExpression SUBTRACT aExpression  { Subtract($1,$3) }
   | aExpression MULTIPLY aExpression  { Multiply($1,$3) }
@@ -81,14 +83,10 @@ aExpression:
   | aExpression POWER aExpression     { Power($1,$3) }
   | LPAR aExpression RPAR             { $2 }
   | aExpression LBRA aExpression RBRA { Array($1,$3) } // We may need to replace VAR with ARRAY and add Regex for ARRAY
+  | aExpression IMPLICATION aExpression {Implication($1,$3)}
+  | aExpression BIIMPLICATION aExpression {BiImplication($1,$3)}
 bExpression:
-  | TRUE                  { True }
   | FALSE                             { False }
-  | bExpression IMPLICATION bExpression {Implication($1,$3)}
-  | bExpression BIIMPLICATION bExpression {BiImplication($1,$3)}
-  | NOT bExpression                   {Not($2)}
-  | bExpression AND bExpression       { And($1,$3) }
-  | bExpression OR bExpression        { Or($1,$3) }
   | bExpression SHORTAND bExpression  { ShortAnd($1,$3) }
   | bExpression SHORTOR bExpression   { ShortOr($1,$3) }
   | NEG bExpression                   { Negate($2) }

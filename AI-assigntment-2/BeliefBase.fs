@@ -5,7 +5,7 @@ open TypesAST
 
 let rec treeC c =
     match c with
-    | BelievesSet(var, values) -> printfn "%A %A" var values
+    | BelievesSet(var, values) -> printfn "%s = %A" var values
 
 
 
