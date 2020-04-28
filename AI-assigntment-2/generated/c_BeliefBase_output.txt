@@ -1,7 +1,1 @@
-BBelievesSetSequence
-  (BelievesSetSequence
-     (BelievesSetSequence
-        (BelievesSetSequence
-           (Belief (True "p"), Belief (Implication (True "q", True "w"))),
-         Belief (BiImplication (True "q", Not (True "z")))),
-      Belief (Or (True "e", True "d"))), Belief (And (True "c", Not (True "r"))))
+[True "p"; True "q"; True "z"; ... ]

@@ -80,11 +80,11 @@ type ExecuteTasks(task: int, tries: int, ?gcl_code0: string) =
 /// <key,(gcl,initial)>
 let programTestGcl =
     Map.ofList
-        [ "varOnly", ("B={p, q, z, x}", "")
-          "predicate", ("B = {p,q→w,q↔¬z}", "")
+        [ "varOnly", ("{p, q, z, x}", "")
+          "predicate", ("{p,q→!w,q↔¬z,e∨d,c&¬r}", "")
           "complexPredicate", ("B = {p,q→w,q↔¬z,e∨d,c∧¬r}", "B={p, q, z, x}") ]
 
-let code = programTestGcl.["complexPredicate"]
+let code = programTestGcl.["predicate"]
 
 ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
 

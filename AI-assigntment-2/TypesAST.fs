@@ -30,7 +30,8 @@ and Predicate =
     | LessEqual of (a * a)
 
 type C =
-    | BelievesSet of (string * D) // Ex. B = {p, q, p → ¬q}
+    | BelievesSet of a List
+    //| BelievesSet of (string * D) // Ex. B = {p, q, p → ¬q}
     | InitialArraySequence of (a * C)
     | InitialValues of (C * C) // C,C
     | InitialAssign of (a * a) // a = a - Only works when called from InitialValues sequence
