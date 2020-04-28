@@ -5,38 +5,15 @@ type token =
   | BIIMPLICATION
   | IMPLICATION
   | COMMA
-  | MULTIPLY
-  | DIVIDE
-  | ADDITION
-  | SUBTRACT
-  | ZERO
-  | POWER
   | TRUE
   | FALSE
   | AND
   | OR
   | EQUAL
-  | NEGEQUAL
-  | LT
-  | LTE
-  | GT
-  | GTE
   | LPAR
   | RPAR
   | LCUR
   | RCUR
-  | LBRA
-  | RBRA
-  | ASSIGN
-  | ASSIGNARRAY
-  | SEQUENCE
-  | SKIP
-  | IF
-  | FI
-  | DO
-  | OD
-  | CONDITION
-  | ELSE
   | EOF
   | NUM of (float)
   | VAR of (string)
@@ -45,38 +22,15 @@ type tokenId =
     | TOKEN_BIIMPLICATION
     | TOKEN_IMPLICATION
     | TOKEN_COMMA
-    | TOKEN_MULTIPLY
-    | TOKEN_DIVIDE
-    | TOKEN_ADDITION
-    | TOKEN_SUBTRACT
-    | TOKEN_ZERO
-    | TOKEN_POWER
     | TOKEN_TRUE
     | TOKEN_FALSE
     | TOKEN_AND
     | TOKEN_OR
     | TOKEN_EQUAL
-    | TOKEN_NEGEQUAL
-    | TOKEN_LT
-    | TOKEN_LTE
-    | TOKEN_GT
-    | TOKEN_GTE
     | TOKEN_LPAR
     | TOKEN_RPAR
     | TOKEN_LCUR
     | TOKEN_RCUR
-    | TOKEN_LBRA
-    | TOKEN_RBRA
-    | TOKEN_ASSIGN
-    | TOKEN_ASSIGNARRAY
-    | TOKEN_SEQUENCE
-    | TOKEN_SKIP
-    | TOKEN_IF
-    | TOKEN_FI
-    | TOKEN_DO
-    | TOKEN_OD
-    | TOKEN_CONDITION
-    | TOKEN_ELSE
     | TOKEN_EOF
     | TOKEN_NUM
     | TOKEN_VAR
@@ -85,7 +39,6 @@ type tokenId =
 type nonTerminalId = 
     | NONTERM__startcExpression
     | NONTERM_dExpression
-    | NONTERM_gcExpression
     | NONTERM_cExpression
     | NONTERM_aExpression
     | NONTERM_bExpression

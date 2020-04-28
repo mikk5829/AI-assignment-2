@@ -86,7 +86,8 @@ let programTestGcl =
 
 let code = programTestGcl.["complexPredicate"]
 
-ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
+//ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
+BeliefBase.generateBeliefBase (parse (fst code))
 
 let readLines (filePath: string) =
     seq {

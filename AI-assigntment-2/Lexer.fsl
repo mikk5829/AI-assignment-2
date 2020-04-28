@@ -25,30 +25,12 @@ rule tokenize = parse
 // deal with tokens that need to be built
 | num           { NUM(Double.Parse(LexBuffer<_>.LexemeString lexbuf)) }
 | var           { VAR(LexBuffer<_>.LexemeString lexbuf) }
-| '*'           { MULTIPLY }
-| '/'           { DIVIDE }
-| '+'           { ADDITION }
-| '-'           { SUBTRACT }
-| '0'           { ZERO }
-| '^'           { POWER }
 | ','           { COMMA }
-| "true"        { TRUE }
-| "false"       { FALSE }
 | '='           { EQUAL }
 | '('           { LPAR }
 | ')'           { RPAR }
 | '{'           { LCUR }
 | '}'           { RCUR }
-| '['           { LBRA }
-| ']'           { RBRA }
-| ":="          { ASSIGN }
-| ';'           { SEQUENCE }
-| "skip"        { SKIP }
-| "if "         { IF }
-| " fi"         { FI }
-| "do "         { DO }
-| " od"         { OD }
-| "[]"          { ELSE }
 | '¬' | '!'     { NOT }
 | '∧' | '&'     { AND }
 | "∨" | '|'     { OR }
