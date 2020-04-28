@@ -15,6 +15,11 @@ let rec toString p = match p with
     | And(p1, p2) -> "(" + toString p1 + ") ^ (" + toString p2 + ")"
     | Or(p1, p2) -> "(" + toString p1 + ") v (" + toString p2 + ")"
 
+let rec BSString b = match b with
+    | [] -> ""
+    | [p] -> toString p
+    | p::tail -> toString p + ", " + BSString tail
+    
 let rec contradict p = match p with
     | True(v) -> [Not(True(v))]
     | Not(p) -> [p]
