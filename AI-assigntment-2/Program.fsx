@@ -82,9 +82,9 @@ let programTestGcl =
     Map.ofList
         [ "varOnly", ("{p, q, z, x}", "")
           "predicate", ("{p,q→!w,q↔¬z,e∨d,c&¬r}", "")
-          "complexPredicate", ("B = {p,q→w,q↔¬z,e∨d,c∧¬r}", "B={p, q, z, x}") ]
+          "complexPredicate", ("{p,q→w,q↔¬z,e∨d,c∧¬r}", "") ]
 
-let code = programTestGcl.["predicate"]
+let code = programTestGcl.["complexPredicate"]
 
 ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
 

@@ -3,10 +3,6 @@ module BeliefBase
 open System.IO
 open TypesAST
 
-let rec treeC c =
-    match c with
-    | BelievesSet (values) -> values
-
 let rec toString p = match p with
     | True(v) -> v
     | Not(p) -> "!(" + toString p+")"
@@ -27,6 +23,12 @@ let rec contradict p = match p with
     | BiImplication(p1, p2) -> [And(Not(p1), p2); And(Not(p2), p1)] @ contradict p1 @ contradict p2
     | And(p1, p2) -> [Not(p1); Not(p2)] @ contradict p1 @ contradict p2
     | Or(p1, p2) -> [And(Not(p1), Not(p2))]
+    
+let rec treeC c =
+    match c with
+    | BelievesSet (values) ->
+        let set = Set.ofList values
+        Set.fold (fun _ elem -> contradict elem) [] set
 
 let rec generateBeliefBase parsed =
     try
