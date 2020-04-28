@@ -1,8 +1,7 @@
-module computer_science_modelling_mandatory.Tasks.BeliefBase
+module BeliefBase
 
 open System.IO
 open TypesAST
-open computer_science_modelling_mandatory.Tasks
 
 let rec treeC c =
     match c with

@@ -1,5 +1,4 @@
 open System.IO
-open computer_science_modelling_mandatory.Tasks
 
 // We need to import a couple of modules, including the generated lexer and parser
 #r "FsLexYacc.Runtime.10.0.0/lib/net46/FsLexYacc.Runtime.dll"
@@ -16,9 +15,9 @@ open Parser
 open Lexer
 
 // Load tasks as modules <- Needed to define namespaces!
-#load "Tasks/TaskOne.fs"
-#load "Tasks/BeliefBase.fs"
-#load "Tasks/LogicalEntailment.fs"
+#load "BeliefBase.fs"
+#load "LogicalEntailment.fs"
+
 
 // 1) Function for parsing GCL code
 let parse input =
@@ -81,7 +80,7 @@ let programTestGcl =
           "predicate", ("B = {p,q→w}", "")
            ]
 
-let code = programTestGcl.["predicate"]
+let code = programTestGcl.["factorial"]
 
 ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
 

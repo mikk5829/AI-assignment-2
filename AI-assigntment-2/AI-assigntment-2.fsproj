@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
-        <RootNamespace>computer_science_modelling_mandatory</RootNamespace>
+        <RootNamespace>AI</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,9 +25,10 @@
         <Compile Include="Parser.fs" />
         <Compile Include="Lexer.fs" />
         <Folder Include="Utility" />
-        <Compile Include="Tasks\TaskOne.fs" />
-        <Compile Include="Tasks\BeliefBase.fs" />
-        <Compile Include="Tasks\LogicalEntailment.fs" />
+        <Compile Include="TaskOne.fs" />
+        <Compile Include="BeliefBase.fs" />
+        <Compile Include="LogicalEntailment.fs" />
+        <Folder Include="Tasks" />
         <Compile Include="Tests\TestTaskTwoNonDeterministic.fs" />
     </ItemGroup>
 

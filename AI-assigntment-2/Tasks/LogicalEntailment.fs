@@ -1,2 +1,0 @@
-module computer_science_modelling_mandatory.Tasks.LogicalEntailment
-
