@@ -6,11 +6,11 @@ open TypesAST
 let rec toString p =
     match p with
     | True (v) -> v
-    | Not (p) -> "!(" + toString p + ")"
-    | Implication (p1, p2) -> toString p1 + " -> " + toString p2
-    | BiImplication (p1, p2) -> "(" + toString p1 + ") <-> (" + toString p2 + ")"
-    | And (p1, p2) -> "(" + toString p1 + ") ^ (" + toString p2 + ")"
-    | Or (p1, p2) -> "(" + toString p1 + ") v (" + toString p2 + ")"
+    | Not (p) -> "¬(" + toString p + ")"
+    | Implication (p1, p2) -> toString p1 + " → " + toString p2
+    | BiImplication (p1, p2) -> "(" + toString p1 + ") ↔ (" + toString p2 + ")"
+    | And (p1, p2) -> "(" + toString p1 + ") ∧ (" + toString p2 + ")"
+    | Or (p1, p2) -> "(" + toString p1 + ") ∨ (" + toString p2 + ")"
 
 let rec BSString b =
     match b with
@@ -37,7 +37,7 @@ let rec treeC c =
     match c with
     | BelievesSet (values) ->
         let set = Set.ofList values
-        Set.fold (fun _ elem -> contradict elem) [] set
+        Set.fold (fun acc elem -> contradict elem@acc) [] set
 
 let rec generateBeliefBase parsed =
     try

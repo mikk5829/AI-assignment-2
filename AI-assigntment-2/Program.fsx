@@ -81,10 +81,10 @@ type ExecuteTasks(task: int, tries: int, ?gcl_code0: string) =
 let programTestGcl =
     Map.ofList
         [ "varOnly", ("{p, q, z, x}", "")
-          "predicate", ("{p,q→!w,q↔¬z,e∨d,c&¬r}", "")
+          "predicate", ("{p, p & q, p | q, p <-> q}", "")
           "complexPredicate", ("{p,q→w,q↔¬z,e∨d,c∧¬r}", "") ]
 
-let code = programTestGcl.["complexPredicate"]
+let code = programTestGcl.["predicate"]
 
 //ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
 BeliefBase.generateBeliefBase (parse (fst code))
