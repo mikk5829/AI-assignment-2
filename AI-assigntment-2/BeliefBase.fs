@@ -5,13 +5,14 @@ open TypesAST
 
 let rec treeC c =
     match c with
-    | BelievesSet(var, values) -> printfn "%s = %A" var values
+    | BelievesSet (var, values) -> var + (string values)
 
 
 
 let rec generateBeliefBase parsed =
     try
         let c = treeC parsed
-        printfn "Generated Belief Base"
+        File.WriteAllText(__SOURCE_DIRECTORY__ + "/generated/c_BeliefBase_output.txt", c)
+        printfn "%s" c
     with err ->
-        printfn "Error.. Tex file not generated \n Error: %A" err
+        failwithf "Error.. BeliefBase file not generated \n Error: %A" err

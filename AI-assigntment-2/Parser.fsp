@@ -6,7 +6,7 @@ open TypesAST
 // Declare the tokens (terminal symbols)
 %token <string> VAR
 %token <float> NUM
-%token NOT BIIMPLICATION IMPLICATION COMMA MULTIPLY DIVIDE ADDITION SUBTRACT ZERO POWER TRUE FALSE SHORTAND SHORTOR AND OR NEG EQUAL NEGEQUAL LT LTE GT GTE LPAR RPAR LCUR RCUR LBRA RBRA ASSIGN ASSIGNARRAY SEQUENCE SKIP IF FI DO OD CONDITION ELSE EOF
+%token NOT BIIMPLICATION IMPLICATION COMMA MULTIPLY DIVIDE ADDITION SUBTRACT ZERO POWER TRUE FALSE AND OR EQUAL NEGEQUAL LT LTE GT GTE LPAR RPAR LCUR RCUR LBRA RBRA ASSIGN ASSIGNARRAY SEQUENCE SKIP IF FI DO OD CONDITION ELSE EOF
 // NOTE: the actual formats of these tokens are defined in the lexer file
 //       as regular expressions
 
@@ -23,9 +23,6 @@ open TypesAST
 %left MULTIPLY DIVIDE
 %right POWER
 %left SUBTRACT 
-%left SHORTOR 
-%left SHORTAND  
-%left NEG
 %left LBRA RBRA // Makes sure an array cannot contain + or - for instance in x+A[i]
 // Fra diskret: () binder stærkere en ¬ binder stærkere end ∧, ∨ binder stærkere end →, ↔ .
 %left IMPLICATION BIIMPLICATION
@@ -87,9 +84,6 @@ aExpression:
   | aExpression BIIMPLICATION aExpression {BiImplication($1,$3)}
 bExpression:
   | FALSE                             { False }
-  | bExpression SHORTAND bExpression  { ShortAnd($1,$3) }
-  | bExpression SHORTOR bExpression   { ShortOr($1,$3) }
-  | NEG bExpression                   { Negate($2) }
   | aExpression EQUAL aExpression     { Equal($1,$3) }
   | aExpression NEGEQUAL aExpression  { NotEqual($1,$3) }
   | aExpression GT aExpression        { GreaterThen($1,$3) }

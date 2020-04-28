@@ -61,7 +61,7 @@ type ExecuteTasks(task: int, tries: int, ?gcl_code0: string) =
             elif task > 6 then
                 failwith "Not a valid task number"
             with err ->
-            printfn "Execution failed %A" err
+                failwithf "Execution failed %A" err
 
 /////////////////////////////////////////////////////////////////
 ///  Run the program
@@ -82,7 +82,7 @@ let programTestGcl =
     Map.ofList
         [ "varOnly", ("B={p, q, z, x}", "")
           "predicate", ("B = {p,q→w,q↔¬z}", "")
-          "complexPredicate", ("B = {p,q→w,q↔¬z,e∨d,c∧¬r}", "") ]
+          "complexPredicate", ("B = {p,q→w,q↔¬z,e∨d,c∧¬r}", "B={p, q, z, x}") ]
 
 let code = programTestGcl.["complexPredicate"]
 

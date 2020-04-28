@@ -34,15 +34,7 @@ rule tokenize = parse
 | ','           { COMMA }
 | "true"        { TRUE }
 | "false"       { FALSE }
-| '&'           { SHORTAND }
-| '|'           { SHORTOR }
-| '!'           { NEG }
 | '='           { EQUAL }
-| "!="          { NEGEQUAL }
-| '>'           { GT }
-| ">="          { GTE }
-| '<'           { LT }
-| "<="          { LTE }
 | '('           { LPAR }
 | ')'           { RPAR }
 | '{'           { LCUR }
@@ -56,11 +48,10 @@ rule tokenize = parse
 | " fi"         { FI }
 | "do "         { DO }
 | " od"         { OD }
-| "->"          { CONDITION }
 | "[]"          { ELSE }
-| "¬"           { NOT }
-| "∧"           { AND }
-| "∨"           { OR }
-| "→"           { IMPLICATION }
-| "↔"           { BIIMPLICATION }
+| '¬' | '!'     { NOT }
+| '∧' | '&'     { AND }
+| "∨" | '|'     { OR }
+| "→" | "->"    { IMPLICATION }
+| "↔" | "<->"   { BIIMPLICATION }
 | eof           { EOF }

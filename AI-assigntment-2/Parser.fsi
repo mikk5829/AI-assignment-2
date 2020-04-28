@@ -13,11 +13,8 @@ type token =
   | POWER
   | TRUE
   | FALSE
-  | SHORTAND
-  | SHORTOR
   | AND
   | OR
-  | NEG
   | EQUAL
   | NEGEQUAL
   | LT
@@ -56,11 +53,8 @@ type tokenId =
     | TOKEN_POWER
     | TOKEN_TRUE
     | TOKEN_FALSE
-    | TOKEN_SHORTAND
-    | TOKEN_SHORTOR
     | TOKEN_AND
     | TOKEN_OR
-    | TOKEN_NEG
     | TOKEN_EQUAL
     | TOKEN_NEGEQUAL
     | TOKEN_LT
