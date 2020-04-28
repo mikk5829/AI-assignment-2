@@ -38,7 +38,7 @@ open TypesAST
 
 // We specify the return type of each of then non-terminal symbols
 %type <a> aExpression
-%type <b> bExpression
+%type <Predicate> bExpression
 %type <C> cExpression
 %type <GC> gcExpression
 %type <D> dExpression
@@ -56,9 +56,10 @@ open TypesAST
 
 dExpression:
   | aExpression { ArrayNum($1) }
+  | bExpression { PredicateAssign($1) }
   | dExpression COMMA dExpression { InitialArraySequence($1,$3) }
 gcExpression:
-  | bExpression CONDITION cExpression{ Condition($1,$3) }
+  | bExpression CONDITION bExpression { Condition($1,$3) }
   | gcExpression ELSE gcExpression   { Else($1,$3) }
 cExpression:
   | aExpression EQUAL LCUR dExpression RCUR {BelievesSet($1,$4)}
@@ -81,7 +82,7 @@ aExpression:
   | LPAR aExpression RPAR             { $2 }
   | aExpression LBRA aExpression RBRA { Array($1,$3) } // We may need to replace VAR with ARRAY and add Regex for ARRAY
 bExpression:
-  | TRUE                              { True }
+  | TRUE                  { True }
   | FALSE                             { False }
   | bExpression IMPLICATION bExpression {Implication($1,$3)}
   | bExpression BIIMPLICATION bExpression {BiImplication($1,$3)}

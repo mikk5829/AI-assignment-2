@@ -78,9 +78,10 @@ type ExecuteTasks(task: int, tries: int, ?gcl_code0: string) =
 let programTestGcl =
     Map.ofList
         [ "factorial", ("B={p, q}", "")
+          "predicate", ("B = {p,q→w}", "")
            ]
 
-let code = programTestGcl.["factorial"]
+let code = programTestGcl.["predicate"]
 
 ExecuteTasks(task = 0, tries = 1, gcl_code0 = fst code)
 

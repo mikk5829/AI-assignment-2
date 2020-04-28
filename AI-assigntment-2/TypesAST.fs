@@ -12,17 +12,17 @@ type a =
     | Divide of (a * a)
     | Power of (a * a)
 
-type b =
+type Predicate =
     | True
     | False
-    | Implication of (b * b)
-    | BiImplication of (b * b)
-    | Not of b
-    | ShortAnd of (b * b)
-    | ShortOr of (b * b)
-    | And of (b * b)
-    | Or of (b * b)
-    | Negate of b
+    | Implication of (Predicate * Predicate)
+    | BiImplication of (Predicate * Predicate)
+    | Not of Predicate
+    | ShortAnd of (Predicate * Predicate)
+    | ShortOr of (Predicate * Predicate)
+    | And of (Predicate * Predicate)
+    | Or of (Predicate * Predicate)
+    | Negate of Predicate
     | Equal of (a * a)
     | NotEqual of (a * a)
     | GreaterThen of (a * a)
@@ -45,11 +45,12 @@ type C =
     | DoOd of GC // do GC od
 
 and GC =
-    | Condition of (b * C) // b -> C
+    | Condition of (Predicate * Predicate) // b -> C
     | Else of (GC * GC) // GC [] GC
 
 and D =
-    | ArrayNum of a 
+    | PredicateAssign of Predicate
+    | ArrayNum of a
     | InitialArraySequence of (D * D)
 
 // Types for Sign Analysis
