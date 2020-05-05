@@ -21,5 +21,7 @@ while True:
     #    belief.p.val = False
 
 print(beliefs)
+for b in beliefs:
+    print(b.cnf().neg())
 
 # CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
