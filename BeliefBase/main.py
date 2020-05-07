@@ -8,31 +8,37 @@ def pl_true(knowledge_base, model):
 
 
 def check_all(knowledge_base, propositional_logic, symbols, model):
-    if len(symbols) == 0:
+    if not symbols:
         if pl_true(knowledge_base, model):
             return pl_true(propositional_logic, model)
         else:
             return True
     else:
         p, *rest = symbols
-        return check_all(knowledge_base, propositional_logic, rest, model.union(p=True))
+        return check_all(knowledge_base, propositional_logic, rest, eval('{**model, p: True}')) and check_all(
+            knowledge_base, propositional_logic, rest, eval('{**model, p: False}'))
 
 
 def entail(knowledge_base, propositional_logic):
     symbols = knowledge_base + propositional_logic
-    return check_all(knowledge_base, propositional_logic, symbols, set())
+    return check_all(knowledge_base, propositional_logic, symbols, {})
 
 
 while True:
-    try:
-        s = input('belief > ')
-        if s == 'DONE':
-            break
-    except EOFError:
-        break
+    # try:
+    #     s = input('belief > ')
+    #     if s == 'DONE':
+    #         break
+    # except EOFError:
+    #     break
 
-    belief = parser.parse(s)
-    beliefs.append(belief)
+    kb = "p&&v"
+    pl = "p"
+    kb_symbol = parser.parse(kb)
+    kb_symbols.append(kb_symbol)
+    pl_symbol = parser.parse(pl)
+    pl_symbols.append(pl_symbol)
+    break
 
     # TODO: Check for contradictions etc here
     # if belief.__class__ is Symbol:
@@ -41,5 +47,6 @@ while True:
     #    belief.p.val = False
 
 print(beliefs)
+print(entail(kb_symbols, pl_symbols))
 
 # CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
