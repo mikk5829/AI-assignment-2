@@ -4,7 +4,13 @@ from lexyacc import *
 
 
 def pl_true(knowledge_base, model):
-    pass
+    if knowledge_base.truth_table in (True, False):
+        return knowledge_base
+    for k in knowledge_base:
+        print(k, ":", k.__class__)
+    operator, args = knowledge_base.__class__, knowledge_base.args
+    print(model)
+    return True
 
 
 def check_all(knowledge_base, propositional_logic, symbols, model):
@@ -32,7 +38,7 @@ while True:
     # except EOFError:
     #     break
 
-    kb = "p&&v"
+    kb = "!p&&v"
     pl = "p"
     kb_symbol = parser.parse(kb)
     kb_symbols.append(kb_symbol)
