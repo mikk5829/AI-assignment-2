@@ -60,7 +60,7 @@ class Conjunction:
         return Conjunction(self.p.cnf(), self.q.cnf())
 
     def neg(self):
-        return Conjunction(self.p.neg(), self.q.neg())
+        return Disjunction(self.p.neg(), self.q.neg())
 
 
 class Disjunction:
@@ -80,7 +80,7 @@ class Disjunction:
         return Disjunction(self.p.cnf(), self.q.cnf())
 
     def neg(self):
-        return Disjunction(self.p.neg(), self.q.neg())
+        return Conjunction(self.p.neg(), self.q.neg())
 
 
 class Implication:
