@@ -32,7 +32,7 @@ class Negation:
         return self.truth_table[self.p.eval(tt)]
 
     def neg(self):
-        if (isinstance(self.p, Negation)):
+        if isinstance(self.p, Negation):
             return self.p.p.neg()
         elif isinstance(self.p, Conjunction):
             return Disjunction(Negation(self.p.p).neg(), Negation(self.p.q).neg())
@@ -66,7 +66,7 @@ class Conjunction:
         return Conjunction(self.p.cnf(), self.q.cnf())
 
     def neg(self):
-        return Disjunction(self.p.neg(), self.q.neg())
+        return Disjunction(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
         symbols = []
@@ -92,7 +92,7 @@ class Disjunction:
         return Disjunction(self.p.cnf(), self.q.cnf())
 
     def neg(self):
-        return Conjunction(self.p.neg(), self.q.neg())
+        return Conjunction(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
         symbols = []
@@ -118,7 +118,7 @@ class Implication:
         return Disjunction(Negation(self.p.cnf()), self.q.cnf())
 
     def neg(self):
-        return Implication(self.p.neg(), self.q.neg())
+        return Implication(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
         symbols = []
@@ -144,7 +144,7 @@ class Biconditional:
         return Conjunction(Implication(self.p.cnf(), self.q.cnf()).cnf(), Implication(self.q.cnf(), self.p.cnf()).cnf())
 
     def neg(self):
-        return Biconditional(self.p.neg(), self.q.neg())
+        return Biconditional(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
         symbols = []

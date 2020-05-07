@@ -17,7 +17,7 @@ def TruthTable(B):
         dicts.append(d.copy());
     return dicts;
 
-
+"""
 while True:
     try:
         s = input('belief > ')
@@ -34,13 +34,21 @@ while True:
     #    belief.val = True
     #elif belief.__class__ is Negation and belief.p.__class__ is Symbol:
     #    belief.p.val = False
+"""
+beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
 
 print(beliefs)
-for b in beliefs:
-    print(b.cnf().neg())
-
+TT = []
 for t in TruthTable(beliefs):
+    valid = True
+    for b in beliefs:
+        if not b.cnf().eval(t):
+            valid = False
+    if valid:
+        TT.append(t)
+
+for t in TT:
     print(t)
-    print(b.eval(t))
+
 
 # CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
