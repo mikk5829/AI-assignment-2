@@ -15,7 +15,7 @@ def pl_true(knowledge_base, model):
 
 def check_all(knowledge_base, propositional_logic, symbols, model):
     if not symbols:
-        if pl_true(knowledge_base, model):
+        if pl_true(propositional_logic, model): # TODO skift med knowledge_base
             return pl_true(propositional_logic, model)
         else:
             return True
@@ -47,12 +47,14 @@ while True:
     break
 
     # TODO: Check for contradictions etc here
-    # if belief.__class__ is Symbol:
+    #if belief.__class__ is Symbol:
     #    belief.val = True
-    # elif belief.__class__ is Negation and belief.p.__class__ is Symbol:
+    #elif belief.__class__ is Negation and belief.p.__class__ is Symbol:
     #    belief.p.val = False
 
 print(beliefs)
 print(entail(kb_symbols, pl_symbols))
+for b in beliefs:
+    print(b.cnf().neg())
 
 # CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
