@@ -4,6 +4,7 @@ import ply.yacc as yacc
 
 symbols = {}
 beliefs = []
+conclusions = []
 
 # List of token names.   This is always required
 tokens = (

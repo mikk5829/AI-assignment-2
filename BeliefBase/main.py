@@ -1,4 +1,5 @@
 from lexyacc import *
+from tables import entails, getSymbols, valid_truth_table, contract
 import cli
 import sys
 
@@ -47,11 +48,44 @@ def belief_base_loop():
             continue
 
 
+def entailment_loop():
+    cli.clear()
+    menu = cli.Menu("Logical entailment THIS IS WIP!", "Select a belief to delete it", {})
+
+    while True:
+        s = input('belief > ')
+        if s.upper() == 'DONE':
+            main_loop()
+            break
+
+        try:
+            belief = parser.parse(s)
+            print(entails(beliefs, [belief]))
+
+        except TypeError:
+            print("Error parsing belief")
+
+
+def contraction_loop():
+    cli.clear()
+    menu = cli.Menu("Contraction", "Enter a belief to contract, eg 'p'\nType DONE to return to main menu", {})
+
+    while True:
+        s = input('belief to contract > ')
+        p = parser.parse(s)
+        print(contract(beliefs, p))
+        if s.upper() == 'DONE':
+            main_loop()
+            break
+
+
 def main_loop():
     cli.clear()
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
             2: ("View current beliefs", lambda: belief_base_loop()),
-            3: ("Save and exit", lambda: arrivederci())}
+            3: ("Check logical entailment", lambda: entailment_loop()),
+            4: ("Contract beliefs", lambda: contraction_loop()),
+            5: ("Save and exit", lambda: arrivederci())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -70,10 +104,14 @@ def main_loop():
 def add_belief(belief):
     beliefs.append(belief)
 
-
 def remove_belief(belief):
     del beliefs[belief]
 
+# conclusions = [parser.parse("b")]
+# beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
+# CTT = valid_truth_table(conclusions, getSymbols(beliefs + conclusions))
+# BTT = valid_truth_table(beliefs, getSymbols(beliefs + conclusions))
+# print(entails(BTT, CTT))
 
 def load():
     f = open("belief_base.txt", "r")
