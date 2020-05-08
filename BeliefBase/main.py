@@ -1,5 +1,5 @@
 from lexyacc import *
-from tables import entails, getSymbols, valid_truth_table
+from tables import entails, getSymbols, valid_truth_table, contract
 import cli
 import sys
 
@@ -53,21 +53,30 @@ def entailment_loop():
     menu = cli.Menu("Logical entailment THIS IS WIP!", "Select a belief to delete it", {})
 
     while True:
-        cli.clear()
-        i = 0
-        menu.options = {}
-        while i < len(beliefs):
-            menu.options[i] = (str(beliefs[i]), lambda j: remove_belief(j))
-            i += 1
-        menu.options[i] = ("Back", lambda j: main_loop())
-        print(menu)
+        s = input('belief > ')
+        if s.upper() == 'DONE':
+            main_loop()
+            break
 
         try:
-            choice = int(input('> '))
-            if choice in menu.options:
-                menu.options[choice][1](choice)
-        except ValueError:
-            continue
+            belief = parser.parse(s)
+            print(entails(beliefs, [belief]))
+
+        except TypeError:
+            print("Error parsing belief")
+
+
+def contraction_loop():
+    cli.clear()
+    menu = cli.Menu("Contraction", "Enter a belief to contract, eg 'p'\nType DONE to return to main menu", {})
+
+    while True:
+        s = input('belief to contract > ')
+        p = parser.parse(s)
+        print(contract(beliefs, p))
+        if s.upper() == 'DONE':
+            main_loop()
+            break
 
 
 def main_loop():
@@ -75,7 +84,8 @@ def main_loop():
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
             2: ("View current beliefs", lambda: belief_base_loop()),
             3: ("Check logical entailment", lambda: entailment_loop()),
-            4: ("Exit", lambda: sys.exit())}
+            4: ("Contract beliefs", lambda: contraction_loop()),
+            5: ("Exit", lambda: sys.exit())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
