@@ -2,6 +2,7 @@ from operators import *
 import lexyacc
 from lexyacc import *
 
+
 def TruthTable(B):
     symbols = []
     for b in B:
@@ -9,7 +10,7 @@ def TruthTable(B):
     symbols = list(dict.fromkeys(symbols))
     n = len(symbols)
     dicts = []
-    for i in range(0, 2**n):
+    for i in range(0, 2 ** n):
         vals = str("{0:b}".format(i)).rjust(n, "0")
         d = {}
         for s in range(0, n):
@@ -17,11 +18,12 @@ def TruthTable(B):
         dicts.append(d.copy())
     return dicts
 
+
 def valid_truth_table(belief_base):
     TT = []
     for t in TruthTable(belief_base):
         valid = True
-        for b in beliefs:
+        for b in belief_base:
             if not b.cnf().eval(t):
                 valid = False
         if valid:
@@ -29,10 +31,19 @@ def valid_truth_table(belief_base):
     return TT
 
 
-# def entails(premise_truth_table, conclusion_truth_table):
-
-
-
+def entails(premise_truth_table, conclusion_truth_table):
+    symbols = []
+    for b in premise_truth_table+conclusion_truth_table:
+        symbols.extend(b)
+    symbols = list(dict.fromkeys(symbols))
+    is_entailing = False
+    for premise in premise_truth_table:
+        if premise in conclusion_truth_table:
+            conclusion_truth_table.remove(premise)
+            is_entailing = True
+        else:
+            return not is_entailing
+    return is_entailing
 
 """
 while True:
@@ -59,17 +70,18 @@ while True:
 """
 # beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
 # conclusions = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
-beliefs = [parser.parse("p")]
-conclusions = [parser.parse("p || q")]
+beliefs = [parser.parse("q || p")]
+conclusions = [parser.parse("p && q")]
 
-print(beliefs)
+print("Belief:     ", beliefs)
+print("Conclusion: ", conclusions)
 
-TT = valid_truth_table(beliefs)
-for t in TT:
+BTT = valid_truth_table(beliefs)
+for t in BTT:
     print(t)
-TT = valid_truth_table(conclusions)
-for t in TT:
+CTT = valid_truth_table(conclusions)
+for t in CTT:
     print(t)
-
+print(entails(BTT, CTT))
 
 # CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
