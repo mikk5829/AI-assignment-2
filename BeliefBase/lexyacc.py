@@ -90,7 +90,7 @@ def p_expression_name(p):
 
 
 def p_error(p):
-    print(f"Syntax error at {p.value!r}")
+    raise TypeError("Syntax error: {0}".format(p.value))
 
 
 # Build the parser

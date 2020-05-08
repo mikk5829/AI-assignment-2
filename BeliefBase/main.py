@@ -1,61 +1,83 @@
-from operators import *
 from lexyacc import *
-from consolemenu import *
-from consolemenu.format import *
-from consolemenu.items import *
+import cli
+import sys
+
+
+def new_belief_loop():
+    cli.clear()
+    menu = cli.Menu("Add new belief",
+                    "Enter new beliefs here, e.g. 'p||(q<->!s)'.\n Type DONE to return to main menu.", {})
+    print('{}\n{}\n=====================\n'.format(menu.title.upper(), menu.subtitle))
+
+    while True:
+        s = input('belief > ')
+        if s.upper() == 'DONE':
+            main_loop()
+            break
+
+        try:
+            belief = parser.parse(s)
+            add_belief(belief)
+
+        # TODO: Check for contradictions etc here
+
+        except TypeError:
+            print("Error parsing belief")
+
+
+def belief_base_loop():
+    cli.clear()
+    menu = cli.Menu("Current beliefs", "Select a belief to delete it", {})
+
+    while True:
+        cli.clear()
+        i = 0
+        menu.options = {}
+        while i < len(beliefs):
+            menu.options[i] = (str(beliefs[i]), lambda j: remove_belief(j))
+            i += 1
+        menu.options[i + 1] = ("Back", lambda j: main_loop())
+        print(menu)
+
+        try:
+            choice = int(input('> '))
+            if choice in menu.options:
+                menu.options[choice][1](choice)
+        except ValueError:
+            continue
+
+
+def main_loop():
+    cli.clear()
+    opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
+            2: ("View current beliefs", lambda: belief_base_loop()),
+            3: ("Exit", lambda: sys.exit())}
+    menu = cli.Menu("Belief Base", "Welcome!", opts)
+
+    while True:
+        cli.clear()
+        print(menu)
+
+        try:
+            choice = int(input('> '))
+            if choice in menu.options:
+                selected_menu = menu.options[int(choice)]
+                selected_menu[1]()
+        except ValueError:
+            continue
 
 
 def add_belief(belief):
     beliefs.append(belief)
 
 
-def remove_belief(belief,menu):
-    print("deleting",belief)
-    beliefs.remove(belief)
-    menu.draw()
+def remove_belief(belief):
+    del beliefs[belief]
+
 
 if __name__ == "__main__":
     # Load beliefs from file
     f = open("belief_base.txt", "r")
-    for belief in f:
-        add_belief(parser.parse(belief))
-
-    print("Loaded belief base", beliefs)
-
-    menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
-        .set_prompt("SELECT>") \
-        .set_title_align('center') \
-        .set_subtitle_align('center') \
-        .set_left_margin(4) \
-        .set_right_margin(4) \
-        .show_header_bottom_border(True)
-
-    menu = ConsoleMenu("Belief Base","Currently {} beliefs in memory".format(len(beliefs)),formatter=menu_format)
-    function_item = FunctionItem("Add new belief", input, ["new belief > "])
-
-    submenu = ConsoleMenu("Current beliefs",subtitle="Select a belief to delete it",formatter=menu_format)
-    for belief in beliefs:
-        submenu.append_item(FunctionItem(belief,remove_belief, [belief,menu]))
-
-    submenu_item = SubmenuItem("View beliefs", submenu=submenu)
-    submenu_item.set_menu(menu)
-    menu.append_item(function_item)
-    menu.append_item(submenu_item)
-    menu.show()
-
-    print("Type DONE to ")
-    while True:
-        try:
-            s = input('belief > ')
-            if s == 'DONE':
-                break
-        except EOFError:
-            break
-
-        belief = parser.parse(s)
-        add_belief(belief)
-        # TODO: Check for contradictions etc here
-
-    print(beliefs)
-
-# CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
+    for b in f:
+        add_belief(parser.parse(b))
+    main_loop()
