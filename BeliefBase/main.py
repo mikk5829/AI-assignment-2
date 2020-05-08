@@ -1,5 +1,5 @@
-from lexyacc import *
-from tables import entails, getSymbols, valid_truth_table, contract
+from lexyacc import beliefs, parser
+from tables import entails, get_symbols, valid_truth_table, contract
 import cli
 import sys
 
@@ -28,14 +28,14 @@ def new_belief_loop():
 
 def belief_base_loop():
     cli.clear()
-    menu = cli.Menu("Current beliefs", "Select a belief to delete it", {})
+    menu = cli.Menu("Current beliefs", "Select a belief to contract it", {})
 
     while True:
         cli.clear()
-        i = 0
+        i = 1
         menu.options = {}
-        while i < len(beliefs):
-            menu.options[i] = (str(beliefs[i]), lambda j: remove_belief(j))
+        while i <= len(beliefs):
+            menu.options[i] = (str(beliefs[i - 1]), lambda j: contract_belief(j - 1))
             i += 1
         menu.options[i] = ("Back", lambda j: main_loop())
         print(menu)
@@ -66,26 +66,12 @@ def entailment_loop():
             print("Error parsing belief")
 
 
-def contraction_loop():
-    cli.clear()
-    menu = cli.Menu("Contraction", "Enter a belief to contract, eg 'p'\nType DONE to return to main menu", {})
-
-    while True:
-        s = input('belief to contract > ')
-        p = parser.parse(s)
-        print(contract(beliefs, p))
-        if s.upper() == 'DONE':
-            main_loop()
-            break
-
-
 def main_loop():
     cli.clear()
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
             2: ("View current beliefs", lambda: belief_base_loop()),
             3: ("Check logical entailment", lambda: entailment_loop()),
-            4: ("Contract beliefs", lambda: contraction_loop()),
-            5: ("Save and exit", lambda: arrivederci())}
+            4: ("Save and exit", lambda: arrivederci())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -104,8 +90,12 @@ def main_loop():
 def add_belief(belief):
     beliefs.append(belief)
 
-def remove_belief(belief):
-    del beliefs[belief]
+
+def contract_belief(belief):
+    global beliefs
+    print("contracting", beliefs[belief], belief)
+    beliefs = contract(beliefs, beliefs[belief])
+
 
 # conclusions = [parser.parse("b")]
 # beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
@@ -120,10 +110,7 @@ def load():
 
 
 def arrivederci():
-    print(beliefs)
     f = open("belief_base.txt", "w")
-    lines = [b.input_format() + '\n' for b in beliefs]
-    print(lines)
     f.writelines([b.input_format() + '\n' for b in beliefs])
     f.close()
 

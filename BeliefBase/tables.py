@@ -1,6 +1,7 @@
 from functools import reduce
 
-def getSymbols(B):
+
+def get_symbols(B):
     symbols = []
     for b in B:
         symbols.extend(b.TT())
@@ -8,7 +9,7 @@ def getSymbols(B):
     return symbols
 
 
-def TruthTable(symbols):
+def truth_table(symbols):
     n = len(symbols)
     dicts = []
     for i in range(0, 2 ** n):
@@ -22,7 +23,7 @@ def TruthTable(symbols):
 
 def valid_truth_table(belief_base, symbols):
     TT = []
-    for t in TruthTable(symbols):
+    for t in truth_table(symbols):
         valid = True
         for b in belief_base:
             if not b.cnf().eval(t):
@@ -33,12 +34,12 @@ def valid_truth_table(belief_base, symbols):
 
 
 def entails(B1, B2):
-    symbols = getSymbols(B1+B2)
-    truth_table = valid_truth_table(B1, symbols)
+    symbols = get_symbols(B1 + B2)
+    tt = valid_truth_table(B1, symbols)
     new_belief_truth_table = valid_truth_table(B2, symbols)
 
     is_entailing = False
-    for premise in truth_table:
+    for premise in tt:
         if premise in new_belief_truth_table:
             new_belief_truth_table.remove(premise)
             is_entailing = True
@@ -48,12 +49,13 @@ def entails(B1, B2):
 
 
 def contract(B, p):
-    subsets = lambda s: reduce(lambda P, x: P + [subset | {x} for subset in P], s, [set()])[1::]
+    def subsets(s):
+        return reduce(lambda P, x: P + [subset | {x} for subset in P], s, [set()])[1::]
+
     bs = subsets(B)
-    newB = {}
+    new_B = {}
     for b in bs:
         if not entails(list(b), [p]):
-            newB = b
+            new_B = b
 
-    print("New B: ", newB)
-
+    return list(new_B)

@@ -5,7 +5,6 @@ class Symbol:
         self.truth_table = {False: False, True: True}
 
     def __repr__(self):
-        #return str((self.name, self.val))
         return self.name
 
     def input_format(self):
@@ -126,7 +125,6 @@ class Implication:
 
     def input_format(self):
         return "({0})->({1})".format(self.p.input_format(), self.q.input_format())
-
 
     def eval(self, tt):
         return self.truth_table[(self.p.eval(tt), self.q.eval(tt))]

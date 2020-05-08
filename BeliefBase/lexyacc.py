@@ -6,7 +6,6 @@ symbols = {}
 beliefs = []
 conclusions = []
 
-# List of token names.   This is always required
 tokens = (
     'NAME',
     'NEGATION',
@@ -14,11 +13,8 @@ tokens = (
     'DISJUNCTION',
     'IMPLICATION',
     'BICONDITIONAL',
-    'COMMA',
     'LPAREN',
     'RPAREN',
-    'LBRACKET',
-    'RBRACKET',
 )
 
 # Regular expression rules for simple tokens
@@ -27,11 +23,8 @@ t_CONJUNCTION = r'&{2}'
 t_DISJUNCTION = r'(\|{2})'
 t_IMPLICATION = r'(->)'
 t_BICONDITIONAL = r'(<->)'
-t_COMMA = r','
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_LBRACKET = r'\{'
-t_RBRACKET = r'\}'
 t_ignore = ' \t\n'
 
 
@@ -50,8 +43,7 @@ def t_error(t):
 # Build the lexer
 lexer = lex.lex()
 
-
-# PARSING RULES
+# Parsing rules
 precedence = (
     ('left', 'IMPLICATION', 'BICONDITIONAL'),
     ('left', 'CONJUNCTION', 'DISJUNCTION'),

@@ -20,5 +20,7 @@ class Menu:
 def clear():
     if platform.system() == "Windows":
         os.system('cls')
+
     else:  # Linux and Mac
         os.system('clear')
+    return
