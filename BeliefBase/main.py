@@ -2,12 +2,16 @@ from operators import *
 import lexyacc
 from lexyacc import *
 
-
-def TruthTable(B):
+def getSymbols(B):
     symbols = []
+    print(B)
     for b in B:
         symbols.extend(b.TT())
     symbols = list(dict.fromkeys(symbols))
+    return symbols
+
+
+def TruthTable(symbols):
     n = len(symbols)
     dicts = []
     for i in range(0, 2 ** n):
@@ -19,9 +23,9 @@ def TruthTable(B):
     return dicts
 
 
-def valid_truth_table(belief_base):
+def valid_truth_table(belief_base, symbols):
     TT = []
-    for t in TruthTable(belief_base):
+    for t in TruthTable(symbols):
         valid = True
         for b in belief_base:
             if not b.cnf().eval(t):
@@ -32,10 +36,6 @@ def valid_truth_table(belief_base):
 
 
 def entails(premise_truth_table, conclusion_truth_table):
-    symbols = []
-    for b in premise_truth_table+conclusion_truth_table:
-        symbols.extend(b)
-    symbols = list(dict.fromkeys(symbols))
     is_entailing = False
     for premise in premise_truth_table:
         if premise in conclusion_truth_table:
@@ -76,10 +76,14 @@ conclusions = [parser.parse("p && q")]
 print("Belief:     ", beliefs)
 print("Conclusion: ", conclusions)
 
-BTT = valid_truth_table(beliefs)
+print(getSymbols(beliefs+conclusions))
+BTT = valid_truth_table(beliefs, getSymbols(beliefs+conclusions))
+
+
 for t in BTT:
     print(t)
-CTT = valid_truth_table(conclusions)
+print("---")
+CTT = valid_truth_table(conclusions, getSymbols(beliefs+conclusions))
 for t in CTT:
     print(t)
 print(entails(BTT, CTT))
