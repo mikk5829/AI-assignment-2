@@ -81,3 +81,6 @@ if __name__ == "__main__":
     for b in f:
         add_belief(parser.parse(b))
     main_loop()
+    print(beliefs)
+    for b in beliefs:
+        print(b.cnf().neg())
