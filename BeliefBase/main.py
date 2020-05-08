@@ -1,4 +1,5 @@
 from lexyacc import *
+from tables import entails, getSymbols, valid_truth_table
 import cli
 import sys
 
@@ -70,10 +71,15 @@ def main_loop():
 def add_belief(belief):
     beliefs.append(belief)
 
+conclusions = [parser.parse("b")]
+beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
 
 def remove_belief(belief):
     del beliefs[belief]
 
+print(entails(BTT, CTT))
+CTT = valid_truth_table(conclusions, getSymbols(beliefs + conclusions))
+BTT = valid_truth_table(beliefs, getSymbols(beliefs + conclusions))
 
 if __name__ == "__main__":
     # Load beliefs from file

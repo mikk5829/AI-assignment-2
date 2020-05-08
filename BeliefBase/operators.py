@@ -2,19 +2,23 @@ class Symbol:
     def __init__(self, name, val=None):
         self.name = name
         self.val = val
+        self.truth_table = {False: False, True: True}
 
     def __repr__(self):
         #return str((self.name, self.val))
         return self.name
 
-    def eval(self):
-        return self.val
+    def eval(self, tt):
+        return tt[self.name]
 
     def cnf(self):
         return self
 
     def neg(self):
         return self
+
+    def TT(self):
+        return [self.name]
 
 
 class Negation:
@@ -25,11 +29,11 @@ class Negation:
     def __repr__(self):
         return "¬{0}".format(self.p)
 
-    def eval(self):
-        return self.truth_table[self.p.eval()]
+    def eval(self, tt):
+        return self.truth_table[self.p.eval(tt)]
 
     def neg(self):
-        if (isinstance(self.p, Negation)):
+        if isinstance(self.p, Negation):
             return self.p.p.neg()
         elif isinstance(self.p, Conjunction):
             return Disjunction(Negation(self.p.p).neg(), Negation(self.p.q).neg())
@@ -42,6 +46,9 @@ class Negation:
     def cnf(self):
         return Negation(self.p.cnf())
 
+    def TT(self):
+        return self.p.TT()
+
 
 class Conjunction:
     def __init__(self, p, q):
@@ -53,14 +60,20 @@ class Conjunction:
     def __repr__(self):
         return "{0} Λ {1}".format(self.p, self.q)
 
-    def eval(self):
-        return self.truth_table[(self.p.eval(), self.q.eval())]
+    def eval(self, tt):
+        return self.truth_table[(self.p.eval(tt), self.q.eval(tt))]
 
     def cnf(self):
         return Conjunction(self.p.cnf(), self.q.cnf())
 
     def neg(self):
-        return Disjunction(self.p.neg(), self.q.neg())
+        return Disjunction(Negation(self.p).neg(), Negation(self.q).neg())
+
+    def TT(self):
+        symbols = []
+        symbols.extend(self.p.TT())
+        symbols.extend(self.q.TT())
+        return symbols
 
 
 class Disjunction:
@@ -73,14 +86,20 @@ class Disjunction:
     def __repr__(self):
         return "{0} V {1}".format(self.p, self.q)
 
-    def eval(self):
-        return self.truth_table[(self.p.eval(), self.q.eval())]
+    def eval(self, tt):
+        return self.truth_table[(self.p.eval(tt), self.q.eval(tt))]
 
     def cnf(self):
         return Disjunction(self.p.cnf(), self.q.cnf())
 
     def neg(self):
-        return Conjunction(self.p.neg(), self.q.neg())
+        return Conjunction(Negation(self.p).neg(), Negation(self.q).neg())
+
+    def TT(self):
+        symbols = []
+        symbols.extend(self.p.TT())
+        symbols.extend(self.q.TT())
+        return symbols
 
 
 class Implication:
@@ -93,14 +112,20 @@ class Implication:
     def __repr__(self):
         return "{0} ⟶ {1}".format(self.p, self.q)
 
-    def eval(self):
-        return self.truth_table[(self.p.eval(), self.q.eval())]
+    def eval(self, tt):
+        return self.truth_table[(self.p.eval(tt), self.q.eval(tt))]
 
     def cnf(self):
         return Disjunction(Negation(self.p.cnf()), self.q.cnf())
 
     def neg(self):
-        return Implication(self.p.neg(), self.q.neg())
+        return Implication(Negation(self.p).neg(), Negation(self.q).neg())
+
+    def TT(self):
+        symbols = []
+        symbols.extend(self.p.TT())
+        symbols.extend(self.q.TT())
+        return symbols
 
 
 class Biconditional:
@@ -113,12 +138,18 @@ class Biconditional:
     def __repr__(self):
         return "{0} ⟷ {1}".format(self.p, self.q)
 
-    def eval(self):
-        return self.truth_table[(self.p.eval(), self.q.eval())]
+    def eval(self, tt):
+        return self.truth_table[(self.p.eval(tt), self.q.eval(tt))]
 
     def cnf(self):
         return Conjunction(Implication(self.p.cnf(), self.q.cnf()).cnf(), Implication(self.q.cnf(), self.p.cnf()).cnf())
 
     def neg(self):
-        return Biconditional(self.p.neg(), self.q.neg())
+        return Biconditional(Negation(self.p).neg(), Negation(self.q).neg())
+
+    def TT(self):
+        symbols = []
+        symbols.extend(self.p.TT())
+        symbols.extend(self.q.TT())
+        return symbols
 
