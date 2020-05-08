@@ -7,6 +7,9 @@ class Symbol:
         #return str((self.name, self.val))
         return self.name
 
+    def input_format(self):
+        return self.name
+
     def eval(self):
         return self.val
 
@@ -24,6 +27,9 @@ class Negation:
 
     def __repr__(self):
         return "¬{0}".format(self.p)
+
+    def input_format(self):
+        return "!({0})".format(self.p.input_format())
 
     def eval(self):
         return self.truth_table[self.p.eval()]
@@ -53,6 +59,9 @@ class Conjunction:
     def __repr__(self):
         return "{0} Λ {1}".format(self.p, self.q)
 
+    def input_format(self):
+        return "({0})&&({1})".format(self.p.input_format(), self.q.input_format())
+
     def eval(self):
         return self.truth_table[(self.p.eval(), self.q.eval())]
 
@@ -72,6 +81,9 @@ class Disjunction:
 
     def __repr__(self):
         return "{0} V {1}".format(self.p, self.q)
+
+    def input_format(self):
+        return "({0})||({1})".format(self.p.input_format(), self.q.input_format())
 
     def eval(self):
         return self.truth_table[(self.p.eval(), self.q.eval())]
@@ -93,6 +105,10 @@ class Implication:
     def __repr__(self):
         return "{0} ⟶ {1}".format(self.p, self.q)
 
+    def input_format(self):
+        return "({0})->({1})".format(self.p.input_format(), self.q.input_format())
+
+
     def eval(self):
         return self.truth_table[(self.p.eval(), self.q.eval())]
 
@@ -112,6 +128,9 @@ class Biconditional:
 
     def __repr__(self):
         return "{0} ⟷ {1}".format(self.p, self.q)
+
+    def input_format(self):
+        return "({0})<->({1})".format(self.p.input_format(), self.q.input_format())
 
     def eval(self):
         return self.truth_table[(self.p.eval(), self.q.eval())]

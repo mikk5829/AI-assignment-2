@@ -1,5 +1,6 @@
 **/__pycache__
 bin/
+belief_base.txt
 obj/
 /packages/
 riderModule.iml

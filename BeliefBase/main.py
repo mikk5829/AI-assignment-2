@@ -51,7 +51,7 @@ def main_loop():
     cli.clear()
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
             2: ("View current beliefs", lambda: belief_base_loop()),
-            3: ("Exit", lambda: sys.exit())}
+            3: ("Save and exit", lambda: arrivederci())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -75,9 +75,23 @@ def remove_belief(belief):
     del beliefs[belief]
 
 
-if __name__ == "__main__":
-    # Load beliefs from file
+def load():
     f = open("belief_base.txt", "r")
     for b in f:
         add_belief(parser.parse(b))
+
+
+def arrivederci():
+    print(beliefs)
+    f = open("belief_base.txt", "w")
+    lines = [b.input_format() + '\n' for b in beliefs]
+    print(lines)
+    f.writelines([b.input_format() + '\n' for b in beliefs])
+    f.close()
+
+    sys.exit()
+
+
+if __name__ == "__main__":
+    load()  # Load beliefs from file
     main_loop()
