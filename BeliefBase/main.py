@@ -2,6 +2,20 @@ from operators import *
 import lexyacc
 from lexyacc import *
 
+def TruthTable(B):
+    symbols = []
+    for b in B:
+        symbols.extend(b.TT())
+    symbols = list(dict.fromkeys(symbols))
+    n = len(symbols)
+    dicts = []
+    for i in range(0, 2**n):
+        vals = str("{0:b}".format(i)).rjust(n, "0")
+        d = {}
+        for s in range(0, n):
+            d[symbols[s]] = vals[s]
+        dicts.append(d.copy());
+    return dicts;
 
 def pl_true(knowledge_base, model):
     if knowledge_base.truth_table in (True, False):
@@ -30,6 +44,7 @@ def entail(knowledge_base, propositional_logic):
     return check_all(knowledge_base, propositional_logic, symbols, {})
 
 
+"""
 while True:
     # try:
     #     s = input('belief > ')
@@ -51,10 +66,21 @@ while True:
     #    belief.val = True
     #elif belief.__class__ is Negation and belief.p.__class__ is Symbol:
     #    belief.p.val = False
+"""
+beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
 
 print(beliefs)
-print(entail(kb_symbols, pl_symbols))
-for b in beliefs:
-    print(b.cnf().neg())
+TT = []
+for t in TruthTable(beliefs):
+    valid = True
+    for b in beliefs:
+        if not b.cnf().eval(t):
+            valid = False
+    if valid:
+        TT.append(t)
+
+for t in TT:
+    print(t)
+
 
 # CNF https://math.stackexchange.com/questions/214338/how-to-convert-to-conjunctive-normal-form
