@@ -13,35 +13,25 @@ def TruthTable(B):
         vals = str("{0:b}".format(i)).rjust(n, "0")
         d = {}
         for s in range(0, n):
-            d[symbols[s]] = vals[s]
-        dicts.append(d.copy());
-    return dicts;
+            d[symbols[s]] = (vals[s] == "1")
+        dicts.append(d.copy())
+    return dicts
 
-def pl_true(knowledge_base, model):
-    if knowledge_base.truth_table in (True, False):
-        return knowledge_base
-    for k in knowledge_base:
-        print(k, ":", k.__class__)
-    operator, args = knowledge_base.__class__, knowledge_base.args
-    print(model)
-    return True
-
-
-def check_all(knowledge_base, propositional_logic, symbols, model):
-    if not symbols:
-        if pl_true(propositional_logic, model): # TODO skift med knowledge_base
-            return pl_true(propositional_logic, model)
-        else:
-            return True
-    else:
-        p, *rest = symbols
-        return check_all(knowledge_base, propositional_logic, rest, eval('{**model, p: True}')) and check_all(
-            knowledge_base, propositional_logic, rest, eval('{**model, p: False}'))
+def valid_truth_table(belief_base):
+    TT = []
+    for t in TruthTable(belief_base):
+        valid = True
+        for b in beliefs:
+            if not b.cnf().eval(t):
+                valid = False
+        if valid:
+            TT.append(t)
+    return TT
 
 
-def entail(knowledge_base, propositional_logic):
-    symbols = knowledge_base + propositional_logic
-    return check_all(knowledge_base, propositional_logic, symbols, {})
+# def entails(premise_truth_table, conclusion_truth_table):
+
+
 
 
 """
@@ -67,18 +57,17 @@ while True:
     #elif belief.__class__ is Negation and belief.p.__class__ is Symbol:
     #    belief.p.val = False
 """
-beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
+# beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
+# conclusions = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
+beliefs = [parser.parse("p")]
+conclusions = [parser.parse("p || q")]
 
 print(beliefs)
-TT = []
-for t in TruthTable(beliefs):
-    valid = True
-    for b in beliefs:
-        if not b.cnf().eval(t):
-            valid = False
-    if valid:
-        TT.append(t)
 
+TT = valid_truth_table(beliefs)
+for t in TT:
+    print(t)
+TT = valid_truth_table(conclusions)
 for t in TT:
     print(t)
 

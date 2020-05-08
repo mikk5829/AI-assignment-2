@@ -9,7 +9,7 @@ class Symbol:
         return self.name
 
     def eval(self, tt):
-        return tt[self.name] == "1"
+        return tt[self.name]
 
     def cnf(self):
         return self
