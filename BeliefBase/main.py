@@ -36,7 +36,7 @@ def belief_base_loop():
         while i < len(beliefs):
             menu.options[i] = (str(beliefs[i]), lambda j: remove_belief(j))
             i += 1
-        menu.options[i + 1] = ("Back", lambda j: main_loop())
+        menu.options[i] = ("Back", lambda j: main_loop())
         print(menu)
 
         try:
