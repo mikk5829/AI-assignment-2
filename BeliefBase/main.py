@@ -48,11 +48,34 @@ def belief_base_loop():
             continue
 
 
+def entailment_loop():
+    cli.clear()
+    menu = cli.Menu("Logical entailment THIS IS WIP!", "Select a belief to delete it", {})
+
+    while True:
+        cli.clear()
+        i = 0
+        menu.options = {}
+        while i < len(beliefs):
+            menu.options[i] = (str(beliefs[i]), lambda j: remove_belief(j))
+            i += 1
+        menu.options[i] = ("Back", lambda j: main_loop())
+        print(menu)
+
+        try:
+            choice = int(input('> '))
+            if choice in menu.options:
+                menu.options[choice][1](choice)
+        except ValueError:
+            continue
+
+
 def main_loop():
     cli.clear()
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
             2: ("View current beliefs", lambda: belief_base_loop()),
-            3: ("Exit", lambda: sys.exit())}
+            3: ("Check logical entailment", lambda: entailment_loop()),
+            4: ("Exit", lambda: sys.exit())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -71,15 +94,14 @@ def main_loop():
 def add_belief(belief):
     beliefs.append(belief)
 
-conclusions = [parser.parse("b")]
-beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
-
 def remove_belief(belief):
     del beliefs[belief]
 
-print(entails(BTT, CTT))
-CTT = valid_truth_table(conclusions, getSymbols(beliefs + conclusions))
-BTT = valid_truth_table(beliefs, getSymbols(beliefs + conclusions))
+# conclusions = [parser.parse("b")]
+# beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
+# CTT = valid_truth_table(conclusions, getSymbols(beliefs + conclusions))
+# BTT = valid_truth_table(beliefs, getSymbols(beliefs + conclusions))
+# print(entails(BTT, CTT))
 
 if __name__ == "__main__":
     # Load beliefs from file
