@@ -35,14 +35,14 @@ def valid_truth_table(belief_base, symbols):
     return TT
 
 
-def entails(premise_truth_table, conclusion_truth_table):
+def entails(truth_table, new_belief_truth_table):
     is_entailing = False
-    for premise in premise_truth_table:
-        if premise in conclusion_truth_table:
-            conclusion_truth_table.remove(premise)
+    for premise in truth_table:
+        if premise in new_belief_truth_table:
+            new_belief_truth_table.remove(premise)
             is_entailing = True
         else:
-            return not is_entailing
+            return False
     return is_entailing
 
 """
@@ -68,10 +68,10 @@ while True:
     #elif belief.__class__ is Negation and belief.p.__class__ is Symbol:
     #    belief.p.val = False
 """
-# beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
-# conclusions = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
-beliefs = [parser.parse("q || p")]
-conclusions = [parser.parse("p && q")]
+beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
+conclusions = [parser.parse("a")]
+# beliefs = [parser.parse("p")]
+# conclusions = [parser.parse("p && q")]
 
 print("Belief:     ", beliefs)
 print("Conclusion: ", conclusions)
