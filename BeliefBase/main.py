@@ -41,9 +41,12 @@ def belief_base_loop():
         print(menu)
 
         try:
-            choice = int(input('> '))
-            if choice in menu.options:
+            choice = input('> ')
+            if int(choice) in menu.options:
                 menu.options[choice][1](choice)
+            else:
+                p = parse(choice)
+                beliefs = contract(beliefs, [p])
         except ValueError:
             continue
 
