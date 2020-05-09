@@ -50,7 +50,8 @@ def belief_base_loop():
 
 def entailment_loop():
     cli.clear()
-    menu = cli.Menu("Logical entailment", "Type a belief to check if it is a logical consequence of the belief base", {})
+    menu = cli.Menu("Logical entailment", "Type a belief to check if it is a logical consequence of the belief base",
+                    {})
 
     while True:
         s = input('belief > ')
@@ -64,6 +65,7 @@ def entailment_loop():
 
         except TypeError:
             print("Error parsing belief")
+
 
 def contract_loop():
     cli.clear()

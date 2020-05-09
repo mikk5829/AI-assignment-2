@@ -21,6 +21,7 @@ class BeliefTests(unittest.TestCase):
         str1 = ''.join(str(e) for e in beliefs)
         self.assertEqual(str1, answer)
 
+
 class ContractionTest(unittest.TestCase):
     def test_one(self):
         beliefs = []
@@ -32,6 +33,7 @@ class ContractionTest(unittest.TestCase):
         contract_list = contract(beliefs, contains)
         str1 = ','.join(str(e) for e in contract_list)
         self.assertEqual(str1, "p ⟷ q")
+
 
 class LogicalEntailmentTest(unittest.TestCase):
     def test_one(self):
@@ -76,6 +78,7 @@ class LogicalEntailmentTest(unittest.TestCase):
         symbols2 = parser.parse(conclusion)
         conclusions.append(symbols2)
         self.assertFalse(entails(beliefs, conclusions))
+
 
 if __name__ == '__main__':
     unittest.main()

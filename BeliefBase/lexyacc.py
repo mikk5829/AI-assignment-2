@@ -27,6 +27,7 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_ignore = ' \t\n'
 
+
 def t_NAME(t):
     r'[a-zA-Z_]+'
     if t.value not in symbols:
