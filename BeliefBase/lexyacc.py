@@ -2,7 +2,7 @@ from operators import *
 import ply.lex as lex
 import ply.yacc as yacc
 
-symbols = {}
+variables = {}
 beliefs = []
 conclusions = []
 
@@ -27,10 +27,11 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_ignore = ' \t\n'
 
+
 def t_NAME(t):
     r'[a-zA-Z_]+'
-    if t.value not in symbols:
-        symbols[t.value] = Symbol(t.value)
+    if t.value not in variables:
+        variables[t.value] = Var(t.value)
     return t
 
 
@@ -78,7 +79,7 @@ def p_expression_group(p):
 
 def p_expression_name(p):
     'expression : NAME'
-    p[0] = symbols[p[1]]
+    p[0] = variables[p[1]]
 
 
 def p_error(p):

@@ -1,29 +1,29 @@
 from functools import reduce
 
 
-def get_symbols(B):
-    symbols = []
+def get_variables(B):
+    variables = []
     for b in B:
-        symbols.extend(b.TT())
-    symbols = list(dict.fromkeys(symbols))
-    return symbols
+        variables.extend(b.TT())
+    variables = list(dict.fromkeys(variables))
+    return variables
 
 
-def truth_table(symbols):
-    n = len(symbols)
+def truth_table(variables):
+    n = len(variables)
     dicts = []
     for i in range(0, 2 ** n):
         vals = str("{0:b}".format(i)).rjust(n, "0")
         d = {}
         for s in range(0, n):
-            d[symbols[s]] = (vals[s] == "1")
+            d[variables[s]] = (vals[s] == "1")
         dicts.append(d.copy())
     return dicts
 
 
-def valid_truth_table(belief_base, symbols):
+def valid_truth_table(belief_base, variables):
     TT = []
-    for t in truth_table(symbols):
+    for t in truth_table(variables):
         valid = True
         for b in belief_base:
             if not b.cnf().eval(t):
@@ -34,9 +34,9 @@ def valid_truth_table(belief_base, symbols):
 
 
 def entails(B1, B2):
-    symbols = get_symbols(B1 + B2)
-    tt = valid_truth_table(B1, symbols)
-    new_belief_truth_table = valid_truth_table(B2, symbols)
+    variables = get_variables(B1 + B2)
+    tt = valid_truth_table(B1, variables)
+    new_belief_truth_table = valid_truth_table(B2, variables)
 
     is_entailing = False
     for premise in tt:

@@ -1,5 +1,5 @@
 from lexyacc import beliefs, parser
-from tables import entails, get_symbols, valid_truth_table, contract
+from tables import entails, get_variables, valid_truth_table, contract
 from operators import Negation
 import cli
 import sys
@@ -50,7 +50,8 @@ def belief_base_loop():
 
 def entailment_loop():
     cli.clear()
-    menu = cli.Menu("Logical entailment", "Type a belief to check if it is a logical consequence of the belief base", {})
+    menu = cli.Menu("Logical entailment", "Type a belief to check if it is a logical consequence of the belief base",
+                    {})
 
     while True:
         s = input('belief > ')
@@ -64,6 +65,7 @@ def entailment_loop():
 
         except TypeError:
             print("Error parsing belief")
+
 
 def contract_loop():
     cli.clear()
@@ -80,7 +82,6 @@ def contract_loop():
             belief = parser.parse(s)
             beliefs = contract(beliefs, belief)
             print(beliefs)
-
         except:
             print("Error contracting belief")
 
@@ -117,13 +118,13 @@ def contract_belief(belief):
 
 
 def load():
-    open("belief_base.txt", "w+")
-    f = open("belief_base.txt", "r")
+    f = open("belief_base.txt", "r+")
     for b in f:
         add_belief(parser.parse(b))
 
 
 def pozegnanie():
+    # Saves the belief base and exits the program
     f = open("belief_base.txt", "w")
     f.writelines([b.input_format() + '\n' for b in beliefs])
     f.close()

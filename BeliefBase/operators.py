@@ -1,4 +1,4 @@
-class Symbol:
+class Var:
     def __init__(self, name, val=None):
         self.name = name
         self.val = val
@@ -44,7 +44,7 @@ class Negation:
             return Disjunction(Negation(self.p.p).neg(), Negation(self.p.q).neg())
         elif isinstance(self.p, Disjunction):
             return Conjunction(Negation(self.p.p).neg(), Negation(self.p.q).neg())
-        elif isinstance(self.p, Symbol):
+        elif isinstance(self.p, Var):
             return self
         return self
 
@@ -78,10 +78,10 @@ class Conjunction:
         return Disjunction(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
-        symbols = []
-        symbols.extend(self.p.TT())
-        symbols.extend(self.q.TT())
-        return symbols
+        variables = []
+        variables.extend(self.p.TT())
+        variables.extend(self.q.TT())
+        return variables
 
 
 class Disjunction:
@@ -107,10 +107,10 @@ class Disjunction:
         return Conjunction(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
-        symbols = []
-        symbols.extend(self.p.TT())
-        symbols.extend(self.q.TT())
-        return symbols
+        variables = []
+        variables.extend(self.p.TT())
+        variables.extend(self.q.TT())
+        return variables
 
 
 class Implication:
@@ -136,10 +136,10 @@ class Implication:
         return Implication(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
-        symbols = []
-        symbols.extend(self.p.TT())
-        symbols.extend(self.q.TT())
-        return symbols
+        variables = []
+        variables.extend(self.p.TT())
+        variables.extend(self.q.TT())
+        return variables
 
 
 class Biconditional:
