@@ -29,7 +29,9 @@ class ContractionTest(unittest.TestCase):
             symbols1 = parser.parse(b)
             beliefs.append(symbols1)
         contains = parser.parse(contain)
-        self.assertTrue(contract(beliefs, contains))
+        contract_list = contract(beliefs, contains)
+        str1 = ','.join(str(e) for e in contract_list)
+        self.assertEqual(str1, "p ⟷ q")
 
 class LogicalEntailmentTest(unittest.TestCase):
     def test_one(self):
