@@ -8,24 +8,23 @@ import sys
 def new_belief_loop():
     cli.clear()
     menu = cli.Menu("Add new belief",
-                    "Enter new beliefs here, e.g. 'p||(q<->!s)'.\n Type DONE to return to main menu.", {})
+                    "Enter new beliefs here, e.g. 'p||(q<->!s)'.\nYou can write comma-separated beliefs on the same line.\nType DONE to return to main menu.",
+                    {})
     print('{}\n{}\n=====================\n'.format(menu.title.upper(), menu.subtitle))
 
     while True:
-        s = input('belief > ')
-        if s.upper() == 'DONE':
-            main_loop()
-            break
+        input_str = input('belief > ').split(',')
 
-        try:
-            belief = parser.parse(s)
-            contract_belief(Negation(belief))
-            add_belief(belief)
-
-        # TODO: Check for contradictions etc here
-
-        except TypeError:
-            print("Error parsing belief")
+        for b in input_str:
+            if b.casefold() == 'done':
+                return
+            try:
+                belief = parser.parse(b)
+                contract_belief(Negation(belief))
+                add_belief(belief)
+                # TODO: Check for contradictions etc here
+            except TypeError:
+                print("Error parsing belief", b)
 
 
 def belief_base_loop():
@@ -92,7 +91,7 @@ def main_loop():
             2: ("View current beliefs", lambda: belief_base_loop()),
             3: ("Check logical entailment", lambda: entailment_loop()),
             4: ("Contract a new belief", lambda: contract_loop()),
-            5: ("Save and exit", lambda: arrivederci())}
+            5: ("Save and exit", lambda: pozegnanie())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -117,12 +116,6 @@ def contract_belief(belief):
     beliefs = contract(beliefs, belief)
 
 
-# conclusions = [parser.parse("b")]
-# beliefs = [parser.parse("!a && b"), parser.parse("c && b"), parser.parse("d || a || b")]
-# CTT = valid_truth_table(conclusions, getSymbols(beliefs + conclusions))
-# BTT = valid_truth_table(beliefs, getSymbols(beliefs + conclusions))
-# print(entails(BTT, CTT))
-
 def load():
     open("belief_base.txt", "w+")
     f = open("belief_base.txt", "r")
@@ -130,11 +123,10 @@ def load():
         add_belief(parser.parse(b))
 
 
-def arrivederci():
+def pozegnanie():
     f = open("belief_base.txt", "w")
     f.writelines([b.input_format() + '\n' for b in beliefs])
     f.close()
-
     sys.exit()
 
 
