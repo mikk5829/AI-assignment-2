@@ -16,9 +16,6 @@ class Var:
     def cnf(self):
         return self
 
-    def neg(self):
-        return self
-
     def TT(self):
         return [self.name]
 
@@ -36,17 +33,6 @@ class Negation:
 
     def eval(self, tt):
         return self.truth_table[self.p.eval(tt)]
-
-    def neg(self):
-        if isinstance(self.p, Negation):
-            return self.p.p.neg()
-        elif isinstance(self.p, Conjunction):
-            return Disjunction(Negation(self.p.p).neg(), Negation(self.p.q).neg())
-        elif isinstance(self.p, Disjunction):
-            return Conjunction(Negation(self.p.p).neg(), Negation(self.p.q).neg())
-        elif isinstance(self.p, Var):
-            return self
-        return self
 
     def cnf(self):
         return Negation(self.p.cnf())
@@ -74,9 +60,6 @@ class Conjunction:
     def cnf(self):
         return Conjunction(self.p.cnf(), self.q.cnf())
 
-    def neg(self):
-        return Disjunction(Negation(self.p).neg(), Negation(self.q).neg())
-
     def TT(self):
         variables = []
         variables.extend(self.p.TT())
@@ -102,9 +85,6 @@ class Disjunction:
 
     def cnf(self):
         return Disjunction(self.p.cnf(), self.q.cnf())
-
-    def neg(self):
-        return Conjunction(Negation(self.p).neg(), Negation(self.q).neg())
 
     def TT(self):
         variables = []
@@ -132,9 +112,6 @@ class Implication:
     def cnf(self):
         return Disjunction(Negation(self.p.cnf()), self.q.cnf())
 
-    def neg(self):
-        return Implication(Negation(self.p).neg(), Negation(self.q).neg())
-
     def TT(self):
         variables = []
         variables.extend(self.p.TT())
@@ -161,12 +138,8 @@ class Biconditional:
     def cnf(self):
         return Conjunction(Implication(self.p.cnf(), self.q.cnf()).cnf(), Implication(self.q.cnf(), self.p.cnf()).cnf())
 
-    def neg(self):
-        return Biconditional(Negation(self.p).neg(), Negation(self.q).neg())
-
     def TT(self):
         symbols = []
         symbols.extend(self.p.TT())
         symbols.extend(self.q.TT())
         return symbols
-
