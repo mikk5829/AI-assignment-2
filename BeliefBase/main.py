@@ -1,8 +1,8 @@
-import sys
-
-import cli
 from lexyacc import beliefs, parser
-from tables import entails, contract
+from tables import entails, get_symbols, valid_truth_table, contract
+from operators import Negation
+import cli
+import sys
 
 
 def new_belief_loop():
@@ -20,6 +20,7 @@ def new_belief_loop():
                 return
             try:
                 belief = parser.parse(b)
+                contract_belief(Negation(belief))
                 add_belief(belief)
                 # TODO: Check for contradictions etc here
             except TypeError:
@@ -29,13 +30,12 @@ def new_belief_loop():
 def belief_base_loop():
     cli.clear()
     menu = cli.Menu("Current beliefs", "Select a belief to contract it", {})
-
     while True:
         cli.clear()
         i = 1
         menu.options = {}
         while i <= len(beliefs):
-            menu.options[i] = (str(beliefs[i - 1]), lambda j: contract_belief(j - 1))
+            menu.options[i] = (str(beliefs[i - 1]), lambda j: contract_belief(beliefs[j - 1]))
             i += 1
         menu.options[i] = ("Back", lambda j: main_loop())
         print(menu)
@@ -50,7 +50,7 @@ def belief_base_loop():
 
 def entailment_loop():
     cli.clear()
-    menu = cli.Menu("Logical entailment THIS IS WIP!", "Select a belief to delete it", {})
+    menu = cli.Menu("Logical entailment", "Type a belief to check if it is a logical consequence of the belief base", {})
 
     while True:
         s = input('belief > ')
@@ -65,13 +65,33 @@ def entailment_loop():
         except TypeError:
             print("Error parsing belief")
 
+def contract_loop():
+    cli.clear()
+    menu = cli.Menu("Contraction", "Please enter a sentence to contract from belief base", {})
+    global beliefs
+
+    while True:
+        s = input("belief > ")
+        if s.upper() == "DONE":
+            main_loop()
+            break
+
+        try:
+            belief = parser.parse(s)
+            beliefs = contract(beliefs, belief)
+            print(beliefs)
+
+        except:
+            print("Error contracting belief")
+
 
 def main_loop():
     cli.clear()
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
             2: ("View current beliefs", lambda: belief_base_loop()),
             3: ("Check logical entailment", lambda: entailment_loop()),
-            4: ("Save and exit", lambda: pozegnanie())}
+            4: ("Contract a new belief", lambda: contract_loop()),
+            5: ("Save and exit", lambda: pozegnanie())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -93,11 +113,11 @@ def add_belief(belief):
 
 def contract_belief(belief):
     global beliefs
-    print("contracting", beliefs[belief], belief)
-    beliefs = contract(beliefs, beliefs[belief])
+    beliefs = contract(beliefs, belief)
 
 
 def load():
+    open("belief_base.txt", "w+")
     f = open("belief_base.txt", "r")
     for b in f:
         add_belief(parser.parse(b))
