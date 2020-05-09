@@ -107,6 +107,7 @@ def contract_belief(belief):
 # print(entails(BTT, CTT))
 
 def load():
+    open("belief_base.txt", "w+")
     f = open("belief_base.txt", "r")
     for b in f:
         add_belief(parser.parse(b))
