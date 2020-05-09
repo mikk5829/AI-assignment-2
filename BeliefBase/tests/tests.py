@@ -21,6 +21,15 @@ class BeliefTests(unittest.TestCase):
         str1 = ''.join(str(e) for e in beliefs)
         self.assertEqual(str1, answer)
 
+    def test_three(self):
+        beliefs = []
+        test, answer = ["p", "p&&q", "p||q", "p<->q"], "p,p Λ q,p V q,p ⟷ q"
+        for b in test:
+            symbols1 = parser.parse(b)
+            beliefs.append(symbols1)
+        str1 = ','.join(str(e) for e in beliefs)
+        self.assertEqual(str1, answer)
+
 
 class ContractionTest(unittest.TestCase):
     def test_one(self):

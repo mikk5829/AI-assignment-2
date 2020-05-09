@@ -35,8 +35,8 @@ def t_NAME(t):
     return t
 
 
-# Error handling rule
 def t_error(t):
+    """Error handling rule"""
     raise TypeError("Illegal character: {0}".format(t.value[0]))
 
 

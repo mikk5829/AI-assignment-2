@@ -10,6 +10,9 @@ def get_variables(B):
 
 
 def truth_table(variables):
+    """
+    Returns a truth table, from given variables
+    """
     n = len(variables)
     dicts = []
     for i in range(0, 2 ** n):
@@ -22,6 +25,9 @@ def truth_table(variables):
 
 
 def valid_truth_table(belief_base, variables):
+    """
+    Returns a valid truth table with given variables, useful for logical entailment
+    """
     TT = []
     for t in truth_table(variables):
         valid = True
@@ -34,6 +40,7 @@ def valid_truth_table(belief_base, variables):
 
 
 def entails(B1, B2):
+    """Checks if B1 entails B2"""
     variables = get_variables(B1 + B2)
     tt = valid_truth_table(B1, variables)
     new_belief_truth_table = valid_truth_table(B2, variables)

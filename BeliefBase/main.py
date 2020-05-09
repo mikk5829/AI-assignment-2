@@ -124,7 +124,7 @@ def load():
 
 
 def pozegnanie():
-    # Saves the belief base and exits the program
+    """Saves the belief base and exits the program"""
     f = open("belief_base.txt", "w")
     f.writelines([b.input_format() + '\n' for b in beliefs])
     f.close()

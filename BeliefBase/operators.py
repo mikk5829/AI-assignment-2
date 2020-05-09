@@ -1,4 +1,7 @@
 class Var:
+    """
+    Var is a true predicate variable
+    """
     def __init__(self, name, val=None):
         self.name = name
         self.val = val
@@ -21,6 +24,9 @@ class Var:
 
 
 class Negation:
+    """
+    Negation is a false predicate variable
+    """
     def __init__(self, p):
         self.p = p
         self.truth_table = {False: True, True: False}
@@ -42,6 +48,9 @@ class Negation:
 
 
 class Conjunction:
+    """
+    Conjunction is a compound statement formed by joining two statements with the connector AND
+    """
     def __init__(self, p, q):
         self.p = p
         self.q = q
@@ -68,6 +77,9 @@ class Conjunction:
 
 
 class Disjunction:
+    """
+    Disjunction is a compound statement formed by joining two statements with the connector OR
+    """
     def __init__(self, p, q):
         self.p = p
         self.q = q
@@ -94,6 +106,9 @@ class Disjunction:
 
 
 class Implication:
+    """
+    Implication is a compound statement formed by joining two statements with the connector IMPLICATION
+    """
     def __init__(self, p, q):
         self.p = p
         self.q = q
@@ -120,6 +135,9 @@ class Implication:
 
 
 class Biconditional:
+    """
+    Biconditional is a compound statement formed by joining two statements with the connector BIIMPLICATION
+    """
     def __init__(self, p, q):
         self.p = p
         self.q = q
