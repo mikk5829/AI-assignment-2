@@ -116,7 +116,7 @@ class Implication:
                             (True, False): False, (True, True): True}
 
     def __repr__(self):
-        return "{0} ⟶ {1}".format(self.p, self.q)
+        return "{0} ⟶  {1}".format(self.p, self.q)
 
     def input_format(self):
         return "({0})->({1})".format(self.p.input_format(), self.q.input_format())
@@ -145,7 +145,7 @@ class Biconditional:
                             (True, False): False, (True, True): True}
 
     def __repr__(self):
-        return "{0} ⟷ {1}".format(self.p, self.q)
+        return "{0} ⟷  {1}".format(self.p, self.q)
 
     def input_format(self):
         return "({0})<->({1})".format(self.p.input_format(), self.q.input_format())
