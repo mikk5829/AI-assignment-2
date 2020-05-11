@@ -85,6 +85,12 @@ def contract_loop():
         except:
             print("Error contracting belief")
 
+def TT():
+    cli.clear();
+    symbs = get_variables(beliefs)
+    rows = valid_truth_table(beliefs, symbs)
+    for r in rows:
+        print(r)
 
 def main_loop():
     cli.clear()
@@ -92,7 +98,8 @@ def main_loop():
             2: ("View current beliefs", lambda: belief_base_loop()),
             3: ("Check logical entailment", lambda: entailment_loop()),
             4: ("Contract a new belief", lambda: contract_loop()),
-            5: ("Save and exit", lambda: pozegnanie())}
+            5: ("TruthTable", lambda: TT()),
+            6: ("Save and exit", lambda: pozegnanie())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
