@@ -44,6 +44,9 @@ def entails(B1, B2):
     variables = get_variables(B1 + B2)
     tt = valid_truth_table(B1, variables)
     new_belief_truth_table = valid_truth_table(B2, variables)
+    if len(tt) == 0 or len(new_belief_truth_table) == 0:
+        print("paradox found")
+        return False
 
     is_entailing = False
     for premise in tt:
