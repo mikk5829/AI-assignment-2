@@ -22,7 +22,6 @@ def new_belief_loop():
                 belief = parser.parse(b)
                 contract_belief(Negation(belief))
                 add_belief(belief)
-                # TODO: Check for contradictions etc here
             except TypeError:
                 print("Error parsing belief", b)
 
