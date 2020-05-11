@@ -98,3 +98,5 @@ modules.xml
 # End of https://www.gitignore.io/api/pycharm+all
 **/pycache
 **/__pycache__
+
+BeliefBase.zip
