@@ -91,6 +91,12 @@ def TT():
     for r in rows:
         print(r)
 
+
+def mastermind():
+    cli.clear()
+    beliefs.clear()
+    load("mastermind.txt")
+
 def main_loop():
     cli.clear()
     opts = {1: ("Add new beliefs", lambda: new_belief_loop()),
@@ -98,7 +104,8 @@ def main_loop():
             3: ("Check logical entailment", lambda: entailment_loop()),
             4: ("Contract a new belief", lambda: contract_loop()),
             5: ("TruthTable", lambda: TT()),
-            6: ("Save and exit", lambda: pozegnanie())}
+            6: ("Play Mastermind", lambda: mastermind()),
+            7: ("Save and exit", lambda: pozegnanie())}
     menu = cli.Menu("Belief Base", "Welcome!", opts)
 
     while True:
@@ -123,8 +130,8 @@ def contract_belief(belief):
     beliefs = contract(beliefs, belief)
 
 
-def load():
-    f = open("belief_base.txt", "r+")
+def load(file):
+    f = open(file, "r+")
     for b in f:
         add_belief(parser.parse(b))
 
@@ -138,5 +145,5 @@ def pozegnanie():
 
 
 if __name__ == "__main__":
-    load()  # Load beliefs from file
+    load("belief_base.txt")  # Load beliefs from file
     main_loop()
