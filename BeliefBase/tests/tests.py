@@ -88,6 +88,17 @@ class LogicalEntailmentTest(unittest.TestCase):
         conclusions.append(symbols2)
         self.assertFalse(entails(beliefs, conclusions))
 
+    def test_five(self):
+        """paradox test"""
+        beliefs = []
+        conclusions = []
+        belief, conclusion = "p&&!p", "q"
+        symbols1 = parser.parse(belief)
+        beliefs.append(symbols1)
+        symbols2 = parser.parse(conclusion)
+        conclusions.append(symbols2)
+        self.assertFalse(entails(beliefs, conclusions))
+
 
 if __name__ == '__main__':
     unittest.main()

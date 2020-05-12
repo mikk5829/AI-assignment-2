@@ -22,7 +22,6 @@ def new_belief_loop():
                 belief = parser.parse(b)
                 contract_belief(Negation(belief))
                 add_belief(belief)
-                # TODO: Check for contradictions etc here
             except TypeError:
                 print("Error parsing belief", b)
 
@@ -34,10 +33,10 @@ def belief_base_loop():
         cli.clear()
         i = 1
         menu.options = {}
+        menu.options[0] = ("Back", lambda j: main_loop())
         while i <= len(beliefs):
             menu.options[i] = (str(beliefs[i - 1]), lambda j: contract_belief(beliefs[j - 1]))
             i += 1
-        menu.options[i] = ("Back", lambda j: main_loop())
         print(menu)
 
         try:
